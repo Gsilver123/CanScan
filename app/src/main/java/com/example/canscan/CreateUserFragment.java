@@ -3,6 +3,8 @@ package com.example.canscan;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class CreateUserFragment extends Fragment implements View.OnClickListener {
+
+    private static final String TAG = CreateUserFragment.class.getSimpleName();
 
     private EditText mUsernameEditText;
     private EditText mPasswordEditText;
@@ -50,7 +54,7 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
                 launchLoginActivityFromCancel();
                 break;
             case R.id.new_user_accept_btn:
-
+                maybeCreateUserAndAddToList();
                 break;
             default:
                 Toast.makeText(getContext(), "Action not supported", Toast.LENGTH_SHORT).show();
@@ -61,5 +65,34 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
     private void launchLoginActivityFromCancel() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
+    }
+
+    private void maybeCreateUserAndAddToList() {
+        boolean canMakeUser = true;
+
+        if (TextUtils.isEmpty(mUsernameEditText.getText().toString())) {
+            mUsernameEditText.setError("Required");
+            canMakeUser = false;
+        }
+        if (TextUtils.isEmpty(mPasswordEditText.getText().toString())) {
+            mPasswordEditText.setError("Required");
+            canMakeUser = false;
+        }
+        if (!canMakeUser) {
+            return;
+        }
+
+        try {
+            User user = new User.Builder()
+                    .setUsername(mUsernameEditText.getText().toString())
+                    .setPassword(mPasswordEditText.getText().toString())
+                    .create();
+        }
+        catch (IllegalStateException exception) {
+            Log.d(TAG, "Cannot make User");
+            return;
+        }
+
+        LoginActivity.startFragment(new HomeFragment());
     }
 }

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:id="@+id/you_have_earned_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/you_have_earned_textView"
+        android:textSize="13sp"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toStartOf="@id/score_start_vertical_guideline"
+        app:layout_constraintTop_toTopOf="@id/score_top_horizonal_guideline"/>
+
+    <TextView
+        android:id="@+id/earned_points_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1234"
+        android:textSize="70sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/score_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/score_end_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/you_have_earned_textView"/>
+
+    <TextView
+        android:id="@+id/points_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/points_textView"
+        android:textSize="13sp"
+        android:textColor="@color/grey"
+        app:layout_constraintEnd_toStartOf="@id/score_end_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/earned_points_textView"/>
+    
+    <View
+        android:id="@+id/horizontal_divider_line"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="@id/button_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/button_end_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/points_textView"/>
+
+    <Button
+        android:id="@+id/scan_code_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_btn"
+        android:drawableStart="@drawable/camera_icon"
+        android:text="@string/bottle_scanner"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/button_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/button_end_vertical_guideline"
+        app:layout_constraintTop_toTopOf="@id/scan_code_btn_guideline"/>
+
+    <Button
+        android:id="@+id/leader_board_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_btn"
+        android:drawableStart="@drawable/trophy_icon"
+        android:text="@string/leader_board"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/button_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/button_end_vertical_guideline"
+        app:layout_constraintTop_toTopOf="@id/leader_board_btn_guideline"/>
+
+    <Button
+        android:id="@+id/rewards_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_btn"
+        android:drawableStart="@drawable/leaf_icon"
+        android:text="@string/rewards"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/button_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/button_end_vertical_guideline"
+        app:layout_constraintTop_toTopOf="@id/rewards_btn_guideline" />
+
+    <Button
+        android:id="@+id/settings_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_btn"
+        android:drawableStart="@drawable/settings_icon"
+        android:text="@string/settings"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/button_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/button_end_vertical_guideline"
+        app:layout_constraintTop_toTopOf="@id/settings_btn_guideline" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/scan_code_btn_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".45"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/leader_board_btn_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".575"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/rewards_btn_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".7"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settings_btn_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".825"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/button_start_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".2"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/button_end_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".8"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/score_start_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".3"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/score_end_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".7"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/score_top_horizonal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".15"/>
+
+</android.support.constraint.ConstraintLayout>

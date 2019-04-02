@@ -19,14 +19,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView mNewUserTextView;
     private Button mLoginButton;
 
+    private static FragmentManager sSupportManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
         initializeViewVariables();
-
         setOnClickListeners();
+
+        sSupportManager = getSupportFragmentManager();
     }
 
     private void initializeViewVariables() {
@@ -48,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 maybeLogInAndRetrieveLoginCredentials();
                 break;
             case R.id.new_user_textView_clickable:
-                startFragment(new CreateUserFragment());
+                startFragment(new CreateUserFragment(), sSupportManager);
                 break;
             default:
                 Toast.makeText(this, "Action not supported", Toast.LENGTH_SHORT).show();
@@ -59,11 +62,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void maybeLogInAndRetrieveLoginCredentials() {
         boolean canLogIn = true;
 
-        if (TextUtils.isEmpty(mUsernameEditText.getText())) {
+        if (TextUtils.isEmpty(mUsernameEditText.getText().toString())) {
             mUsernameEditText.setError("Required");
             canLogIn = false;
         }
-        if (TextUtils.isEmpty(mPasswordEditText.getText())) {
+        if (TextUtils.isEmpty(mPasswordEditText.getText().toString())) {
             mPasswordEditText.setError("Required");
             canLogIn = false;
         }
@@ -71,11 +74,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(!canLogIn) {
             return;
         }
+
+        if (mUsernameEditText.getText().toString() == UserLab.get().getUser().getUsername()
+                && mPasswordEditText.getText().toString() == UserLab.get().getUser().getPassword()) {
+
+            startFragment(new HomeFragment(), getSupportFragmentManager());
+        }
+        else {
+            Toast.makeText(this, "Incorrect Login", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    public void startFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
+    private static void startFragment(Fragment fragment, FragmentManager manager) {
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.fragment_container, fragment);
         transaction.commit();
+    }
+
+    public static void startFragment(Fragment fragment) {
+        startFragment(fragment, sSupportManager);
     }
 }

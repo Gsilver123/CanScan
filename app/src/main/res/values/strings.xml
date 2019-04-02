@@ -9,4 +9,12 @@
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
     <string name="create_account_header">Create Account</string>
+
+    <string name="you_have_earned_textView">You Have Earned</string>
+    <string name="points_textView">Points!</string>
+    <string name="bottle_scanner">Bottle Scanner</string>
+    <string name="leader_board">LeaderBoard</string>
+    <string name="rewards">Rewards</string>
+    <string name="settings">Settings</string>
+    <string name="welcome">Welcome</string>
 </resources>
