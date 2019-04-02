@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="LoginCred" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+    </style>
 </resources>
