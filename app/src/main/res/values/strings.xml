@@ -3,4 +3,10 @@
     <string name="username_login">Username</string>
     <string name="password_login">Password</string>
     <string name="login_btn">Login</string>
+    <string name="new_user_textView">New User? Click </string>
+    <string name="new_user_btn">Here!</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="create_account_header">Create Account</string>
 </resources>
