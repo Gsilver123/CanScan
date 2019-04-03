@@ -1,12 +1,12 @@
 package com.example.canscan;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -21,12 +21,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         View view = inflater.inflate(R.layout.user_home, container, false);
 
         initializeViewVariables(view);
         setOnClickListeners();
-
 
         return view;
     }
@@ -49,16 +48,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.scan_code_btn:
-
+                Toast.makeText(getContext(), "Barcode scanner", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.leader_board_btn:
-
+                Toast.makeText(getContext(), "Leader Boards", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rewards_btn:
-
+                Toast.makeText(getContext(), "Rewards", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.settings_btn:
-
+                Toast.makeText(getContext(), "Settings", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(getContext(), "Action not supported", Toast.LENGTH_SHORT).show();

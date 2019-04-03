@@ -1,23 +1,22 @@
 package com.example.canscan;
 
 
-public class UserLab {
+class UserLab {
 
     private User mCurrentUser;
 
     private static UserLab sUserLab;
 
-    public static UserLab get() {
+    static UserLab get() {
         if (sUserLab == null) {
-            return new UserLab();
+            sUserLab = new UserLab();
         }
-
         return sUserLab;
     }
 
     private UserLab() { }
 
-    public User getUser() {
+    User getCurrentUser() {
         return mCurrentUser;
     }
 

@@ -1,11 +1,8 @@
 package com.example.canscan;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +16,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView mNewUserTextView;
     private Button mLoginButton;
 
-    private static FragmentManager sSupportManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +23,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         initializeViewVariables();
         setOnClickListeners();
-
-        sSupportManager = getSupportFragmentManager();
     }
 
     private void initializeViewVariables() {
@@ -51,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 maybeLogInAndRetrieveLoginCredentials();
                 break;
             case R.id.new_user_textView_clickable:
-                startFragment(new CreateUserFragment(), sSupportManager);
+                startActivityFromLogin(CreateUserActivity.class);
                 break;
             default:
                 Toast.makeText(this, "Action not supported", Toast.LENGTH_SHORT).show();
@@ -60,38 +53,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void maybeLogInAndRetrieveLoginCredentials() {
-        boolean canLogIn = true;
-
-        if (TextUtils.isEmpty(mUsernameEditText.getText().toString())) {
-            mUsernameEditText.setError("Required");
-            canLogIn = false;
-        }
-        if (TextUtils.isEmpty(mPasswordEditText.getText().toString())) {
-            mPasswordEditText.setError("Required");
-            canLogIn = false;
-        }
-
-        if(!canLogIn) {
-            return;
-        }
-
-        if (mUsernameEditText.getText().toString() == UserLab.get().getUser().getUsername()
-                && mPasswordEditText.getText().toString() == UserLab.get().getUser().getPassword()) {
-
-            startFragment(new HomeFragment(), getSupportFragmentManager());
-        }
-        else {
-            Toast.makeText(this, "Incorrect Login", Toast.LENGTH_SHORT).show();
+        if (UserUtils.maybeCreateUserAndLaunchActivity(mUsernameEditText, mPasswordEditText)) {
+            startActivityFromLogin(HomeActivity.class);
         }
     }
 
-    private static void startFragment(Fragment fragment, FragmentManager manager) {
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.fragment_container, fragment);
-        transaction.commit();
-    }
-
-    public static void startFragment(Fragment fragment) {
-        startFragment(fragment, sSupportManager);
+    private void startActivityFromLogin(Class activityClass) {
+        Intent intent = new Intent(this, activityClass);
+        startActivity(intent);
+        finish();
     }
 }

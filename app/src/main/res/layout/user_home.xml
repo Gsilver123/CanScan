@@ -19,7 +19,7 @@
         android:id="@+id/earned_points_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1234"
+        android:text="1232"
         android:textSize="70sp"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@id/score_start_vertical_guideline"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@id/you_have_earned_textView"/>
 
     <TextView
-        android:id="@+id/points_textView"
+        android:id="@+id/earned_points_below_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/points_textView"
@@ -44,7 +44,7 @@
         android:background="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="@id/button_start_vertical_guideline"
         app:layout_constraintEnd_toEndOf="@id/button_end_vertical_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/points_textView"/>
+        app:layout_constraintTop_toBottomOf="@+id/earned_points_below_textView"/>
 
     <Button
         android:id="@+id/scan_code_btn"
