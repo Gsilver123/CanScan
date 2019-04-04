@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
+    private TextView mPointsEarned;
     private Button mScanCodeButton;
     private Button mLeaderBoardButton;
     private Button mRewardsButton;
@@ -27,10 +29,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         initializeViewVariables(view);
         setOnClickListeners();
 
+        mPointsEarned.setText(String.valueOf(UserLab.get().getCurrentUser().getScore()));
+
         return view;
     }
 
     private void initializeViewVariables(View view) {
+        mPointsEarned = view.findViewById(R.id.earned_points_textView);
         mScanCodeButton = view.findViewById(R.id.scan_code_btn);
         mLeaderBoardButton = view.findViewById(R.id.leader_board_btn);
         mRewardsButton = view.findViewById(R.id.rewards_btn);
