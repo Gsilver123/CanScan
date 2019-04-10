@@ -41,56 +41,6 @@ class UserLab {
         return mCurrentUser;
     }
 
-    void setCurrentUser(User user) {
-        mCurrentUser = user;
-    }
-
-    void updateUserInfoOnDatabase(String username, String password, Integer points) {
-        getStitchClient().getAuth().loginWithCredential(new AnonymousCredential()).continueWithTask(task -> {
-            if (!task.isSuccessful()) {
-                Log.e("STITCH", "Login failed!");
-                throw Objects.requireNonNull(task.getException());
-            }
-
-            final Document updateDoc = new Document(
-                    USER_ID,
-                    Objects.requireNonNull(task.getResult()).getId()
-            );
-
-            if (username != null) {
-                updateDoc.put(USER_NAME, username);
-            }
-            else {
-                updateDoc.put(USER_NAME, mCurrentUser.getUsername());
-            }
-
-            if (password != null) {
-                updateDoc.put(PASSWORD, password);
-            }
-            else {
-                updateDoc.put(PASSWORD, mCurrentUser.getPassword());
-            }
-
-            if (points != null) {
-                updateDoc.put(POINTS, points);
-            }
-            else {
-                updateDoc.put(POINTS, mCurrentUser.getScore());
-            }
-
-            return getMongoCollection().updateOne(
-                    null, updateDoc, new RemoteUpdateOptions().upsert(true)
-            );
-        }).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Log.d(STITCH, "Updated User");
-                return;
-            }
-            Log.e(STITCH, "Error: " + Objects.requireNonNull(task.getException()).toString());
-            task.getException().printStackTrace();
-        });
-    }
-
     void updateCurrentUserFromDatabase() {
 
         getStitchClient().getAuth().loginWithCredential(new AnonymousCredential()).continueWithTask(task -> {
