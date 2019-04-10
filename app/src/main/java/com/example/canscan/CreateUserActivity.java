@@ -3,10 +3,28 @@ package com.example.canscan;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
+import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateOptions;
+
+import org.bson.Document;
+
+import java.util.Objects;
+
+import static com.example.canscan.DataBaseUtils.PASSWORD;
+import static com.example.canscan.DataBaseUtils.POINTS;
+import static com.example.canscan.DataBaseUtils.STITCH;
+import static com.example.canscan.DataBaseUtils.USER_ID;
+import static com.example.canscan.DataBaseUtils.USER_NAME;
+import static com.example.canscan.DataBaseUtils.getMongoCollection;
+import static com.example.canscan.DataBaseUtils.getStitchClient;
 
 public class CreateUserActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,6 +40,10 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
 
         initializeViewVariables();
         setOnClickListeners();
+
+        if (getWindow() != null) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        }
     }
 
     private void initializeViewVariables() {
@@ -43,7 +65,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                 startActivityFromCreateUserActivity(LoginActivity.class);
                 break;
             case R.id.new_user_accept_btn:
-                maybeLaunchHomeFragment();
+                createUserInDatabase();
                 break;
             default:
                 Toast.makeText(this, "Action not supported", Toast.LENGTH_SHORT).show();
@@ -51,10 +73,87 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    private void maybeLaunchHomeFragment() {
-        if (UserUtils.maybeCreateUserAndLaunchActivity(mUsernameEditText, mPasswordEditText)) {
-            startActivityFromCreateUserActivity(HomeActivity.class);
+    private void createUserInDatabase() {
+        if (!areFieldsFilled()) {
+            return;
         }
+
+        getStitchClient().getAuth().loginWithCredential(
+                new AnonymousCredential()).continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                Log.e("STITCH", "Login failed!");
+                throw Objects.requireNonNull(task.getException());
+            }
+
+            final Document updateDoc = new Document(
+                    USER_ID,
+                    Objects.requireNonNull(task.getResult()).getId()
+            );
+
+            updateDoc.put(USER_NAME, mUsernameEditText.getText().toString().toLowerCase());
+            updateDoc.put(PASSWORD, mPasswordEditText.getText().toString().toLowerCase());
+            updateDoc.put(POINTS, 0);
+
+            return getMongoCollection().updateOne(
+                    null, updateDoc, new RemoteUpdateOptions().upsert(true)
+            );
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d(STITCH,
+                        "Found docs: " + Objects.requireNonNull(task.getResult()).toString());
+
+                startActivityFromCreateUserActivity(HomeActivity.class);
+
+                return;
+            }
+            Log.e(STITCH, "Error: " + Objects.requireNonNull(task.getException()).toString());
+            task.getException().printStackTrace();
+        });
+    }
+
+    private boolean areFieldsFilled() {
+        boolean canLogIn = true;
+
+        if (TextUtils.isEmpty(mUsernameEditText.getText().toString())) {
+            mUsernameEditText.setError("Required");
+            canLogIn = false;
+        }
+        if (TextUtils.isEmpty(mPasswordEditText.getText().toString())) {
+            mPasswordEditText.setError("Required");
+            canLogIn = false;
+        }
+
+        return maybeRemoveExtraSpaceAndAllowLogin(canLogIn);
+    }
+
+    private boolean maybeRemoveExtraSpaceAndAllowLogin(boolean canLogIn) {
+        if (!canLogIn) {
+            return false;
+        }
+
+        String username = mUsernameEditText.getText().toString();
+        String password = mPasswordEditText.getText().toString();
+
+        for (int i = 0; i < username.length(); i++) {
+            if (username.charAt(i) == ' ') {
+                canLogIn = false;
+                mUsernameEditText.setError("Only Letters, Numbers and Symbols");
+            }
+        }
+
+        for (int i = 0; i < password.length(); i++) {
+            if (password.charAt(i) == ' ') {
+                canLogIn = false;
+                mPasswordEditText.setError("Only Letters, Numbers and Symbols");
+            }
+        }
+
+        if (password.length() < 5) {
+            mPasswordEditText.setError("Password must be longer than 5 characters");
+            canLogIn = false;
+        }
+
+        return canLogIn;
     }
 
     private void startActivityFromCreateUserActivity(Class activityClass) {

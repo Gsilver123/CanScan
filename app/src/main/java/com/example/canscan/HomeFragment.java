@@ -7,10 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomeFragment extends Fragment implements View.OnClickListener {
+import com.example.canscan.UserLab.DatabaseObserver;
 
+public class HomeFragment extends Fragment implements View.OnClickListener, DatabaseObserver {
+
+    private TextView mPointsEarned;
     private Button mScanCodeButton;
     private Button mLeaderBoardButton;
     private Button mRewardsButton;
@@ -27,10 +31,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         initializeViewVariables(view);
         setOnClickListeners();
 
+        UserLab.get().registerDatabaseObserver(this);
+
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        UserLab.get().removeDatabaseObserver(this);
+    }
+
     private void initializeViewVariables(View view) {
+        mPointsEarned = view.findViewById(R.id.earned_points_textView);
         mScanCodeButton = view.findViewById(R.id.scan_code_btn);
         mLeaderBoardButton = view.findViewById(R.id.leader_board_btn);
         mRewardsButton = view.findViewById(R.id.rewards_btn);
@@ -42,6 +55,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mLeaderBoardButton.setOnClickListener(this);
         mRewardsButton.setOnClickListener(this);
         mSettingsButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void notifyDatabaseCompletedTasks() {
+        mPointsEarned.setText(String.valueOf(UserLab.get().getCurrentUser().getScore()));
     }
 
     @Override

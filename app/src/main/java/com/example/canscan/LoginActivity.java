@@ -3,11 +3,31 @@ package com.example.canscan;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
+
+import org.bson.Document;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static com.example.canscan.DataBaseUtils.PASSWORD;
+import static com.example.canscan.DataBaseUtils.STITCH;
+import static com.example.canscan.DataBaseUtils.USER_ID;
+import static com.example.canscan.DataBaseUtils.USER_NAME;
+import static com.example.canscan.DataBaseUtils.getStitchClient;
+import static com.example.canscan.DataBaseUtils.getMongoCollection;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,6 +43,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         initializeViewVariables();
         setOnClickListeners();
+
+        if (getStitchClient() == null && getMongoCollection() == null) {
+            DataBaseUtils.initializeDatabase();
+        }
+
+        if (getWindow() != null) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        }
     }
 
     private void initializeViewVariables() {
@@ -41,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_btn:
-                maybeLogInAndRetrieveLoginCredentials();
+                retrieveDataFromDatabaseAndMaybeLaunchHomeActivity();
                 break;
             case R.id.new_user_textView_clickable:
                 startActivityFromLogin(CreateUserActivity.class);
@@ -52,8 +80,67 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void maybeLogInAndRetrieveLoginCredentials() {
-        if (UserUtils.maybeCreateUserAndLaunchActivity(mUsernameEditText, mPasswordEditText)) {
+    private boolean areFieldsFilled() {
+        boolean canLogIn = true;
+
+        if (TextUtils.isEmpty(mUsernameEditText.getText().toString())) {
+            mUsernameEditText.setError("Required");
+            canLogIn = false;
+        }
+        if (TextUtils.isEmpty(mPasswordEditText.getText().toString())) {
+            mPasswordEditText.setError("Required");
+            canLogIn = false;
+        }
+
+        return canLogIn;
+    }
+
+    private void retrieveDataFromDatabaseAndMaybeLaunchHomeActivity() {
+        if (!areFieldsFilled()) {
+            return;
+        }
+
+        getStitchClient().getAuth().loginWithCredential(
+                new AnonymousCredential()).continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                Log.e(STITCH, "Update failed!");
+                throw Objects.requireNonNull(task.getException());
+            }
+            List<Document> docs = new ArrayList<>();
+
+            return getMongoCollection()
+                    .find(new Document(USER_ID, Objects.requireNonNull(getStitchClient()
+                            .getAuth().getUser()).getId()))
+                    .limit(1)
+                    .into(docs);
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d(STITCH,
+                        "Found docs: " + Objects.requireNonNull(task.getResult()).toString());
+
+                try {
+                    compareUserInputToDatabase(task.getResult());
+                } catch (JSONException exception) {
+                    exception.printStackTrace();
+                }
+
+                return;
+            }
+            Log.e(STITCH, "Error: " + Objects.requireNonNull(task.getException()).toString());
+            task.getException().printStackTrace();
+        });
+    }
+
+    private void compareUserInputToDatabase(List<Document> documents) throws JSONException {
+        JSONObject json = new JSONObject(documents.get(0).toJson());
+
+        if (!(mUsernameEditText.getText().toString().equals(json.get(USER_NAME)))
+            || !(mPasswordEditText.getText().toString().equals(json.get(PASSWORD)))) {
+
+            Toast.makeText(
+                    this, "Username - Password incorrect", Toast.LENGTH_SHORT).show();
+        }
+        else {
             startActivityFromLogin(HomeActivity.class);
         }
     }

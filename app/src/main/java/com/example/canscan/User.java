@@ -4,11 +4,12 @@ public class User {
 
     private String mUsername;
     private String mPassword;
-    private int mScore = 0;
+    private int mScore;
 
-    private User(String username, String password) {
+    private User(String username, String password, int score) {
         mUsername = username;
         mPassword = password;
+        mScore = score;
     }
 
     String getUsername() {
@@ -19,7 +20,7 @@ public class User {
         return mPassword;
     }
 
-    long getScore() {
+    int getScore() {
         return mScore;
     }
 
@@ -31,6 +32,7 @@ public class User {
 
         private String mBuilderUsername;
         private String mBuilderPassword;
+        private int mBuilderScore;
 
         User.Builder setUsername(String username) {
             mBuilderUsername = username;
@@ -42,12 +44,17 @@ public class User {
             return this;
         }
 
+        User.Builder setScore(int score) {
+            mBuilderScore = score;
+            return this;
+        }
+
         User create() throws IllegalStateException {
-            if (mBuilderUsername == null || mBuilderPassword == null) {
+            if (mBuilderUsername == null || mBuilderPassword == null || mBuilderScore < 0) {
                 throw new IllegalStateException("Credentials not met");
             }
 
-            return new User(mBuilderUsername, mBuilderPassword);
+            return new User(mBuilderUsername, mBuilderPassword, mBuilderScore);
         }
     }
  }
