@@ -3,7 +3,6 @@ package com.example.canscan;
 import android.util.Log;
 
 import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
-import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateOptions;
 
 import org.bson.Document;
 import org.json.JSONException;

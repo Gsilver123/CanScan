@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -39,6 +40,10 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
 
         initializeViewVariables();
         setOnClickListeners();
+
+        if (getWindow() != null) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        }
     }
 
     private void initializeViewVariables() {
@@ -84,8 +89,8 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                     Objects.requireNonNull(task.getResult()).getId()
             );
 
-            updateDoc.put(USER_NAME, mUsernameEditText.getText().toString());
-            updateDoc.put(PASSWORD, mPasswordEditText.getText().toString());
+            updateDoc.put(USER_NAME, mUsernameEditText.getText().toString().toLowerCase());
+            updateDoc.put(PASSWORD, mPasswordEditText.getText().toString().toLowerCase());
             updateDoc.put(POINTS, 0);
 
             return getMongoCollection().updateOne(
@@ -114,6 +119,36 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
         }
         if (TextUtils.isEmpty(mPasswordEditText.getText().toString())) {
             mPasswordEditText.setError("Required");
+            canLogIn = false;
+        }
+
+        return maybeRemoveExtraSpaceAndAllowLogin(canLogIn);
+    }
+
+    private boolean maybeRemoveExtraSpaceAndAllowLogin(boolean canLogIn) {
+        if (!canLogIn) {
+            return false;
+        }
+
+        String username = mUsernameEditText.getText().toString();
+        String password = mPasswordEditText.getText().toString();
+
+        for (int i = 0; i < username.length(); i++) {
+            if (username.charAt(i) == ' ') {
+                canLogIn = false;
+                mUsernameEditText.setError("Only Letters, Numbers and Symbols");
+            }
+        }
+
+        for (int i = 0; i < password.length(); i++) {
+            if (password.charAt(i) == ' ') {
+                canLogIn = false;
+                mPasswordEditText.setError("Only Letters, Numbers and Symbols");
+            }
+        }
+
+        if (password.length() < 5) {
+            mPasswordEditText.setError("Password must be longer than 5 characters");
             canLogIn = false;
         }
 
