@@ -11,6 +11,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(bundle);
         setContentView(R.layout.main_screen);
 
+        UserLab.get().updateCurrentUserFromDatabase();
         startHomeFragment();
     }
 

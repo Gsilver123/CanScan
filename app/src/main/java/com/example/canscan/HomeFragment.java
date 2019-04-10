@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomeFragment extends Fragment implements View.OnClickListener {
+import com.example.canscan.UserLab.DatabaseObserver;
+
+public class HomeFragment extends Fragment implements View.OnClickListener, DatabaseObserver {
 
     private TextView mPointsEarned;
     private Button mScanCodeButton;
@@ -29,9 +31,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         initializeViewVariables(view);
         setOnClickListeners();
 
-        mPointsEarned.setText(String.valueOf(UserLab.get().getCurrentUser().getScore()));
+        UserLab.get().registerDatabaseObserver(this);
 
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        UserLab.get().removeDatabaseObserver(this);
     }
 
     private void initializeViewVariables(View view) {
@@ -47,6 +55,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mLeaderBoardButton.setOnClickListener(this);
         mRewardsButton.setOnClickListener(this);
         mSettingsButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void notifyDatabaseCompletedTasks() {
+        mPointsEarned.setText(String.valueOf(UserLab.get().getCurrentUser().getScore()));
     }
 
     @Override

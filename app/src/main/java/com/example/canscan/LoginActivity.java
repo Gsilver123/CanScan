@@ -1,9 +1,9 @@
 package com.example.canscan;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,96 +11,41 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.mongodb.stitch.android.core.Stitch;
-import com.mongodb.stitch.android.core.StitchAppClient;
-import com.mongodb.stitch.android.core.auth.StitchUser;
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
 import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
-import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateOptions;
-import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateResult;
 
-import org.bson.BsonDocument;
-import org.bson.BsonObjectId;
-import org.bson.BsonString;
 import org.bson.Document;
-import org.bson.types.ObjectId;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static com.example.canscan.DataBaseUtils.PASSWORD;
+import static com.example.canscan.DataBaseUtils.STITCH;
+import static com.example.canscan.DataBaseUtils.USER_ID;
+import static com.example.canscan.DataBaseUtils.USER_NAME;
+import static com.example.canscan.DataBaseUtils.getStitchClient;
+import static com.example.canscan.DataBaseUtils.getMongoCollection;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private static final String TAG = LoginActivity.class.getSimpleName();
 
     private EditText mUsernameEditText;
     private EditText mPasswordEditText;
     private TextView mNewUserTextView;
     private Button mLoginButton;
 
-    private boolean mCanLogIn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        mCanLogIn = true;
-
         initializeViewVariables();
         setOnClickListeners();
-        initializeDataBaseStitchAndVerifyCredentials();
-    }
 
-    private void initializeDataBaseStitchAndVerifyCredentials() {
-        final StitchAppClient client =
-                Stitch.initializeDefaultAppClient("canscandb-cgwjo");
-
-        final RemoteMongoClient mongoClient =
-                client.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
-
-        final RemoteMongoCollection<Document> coll =
-                mongoClient.getDatabase("CanScanUsers").getCollection("Users");
-
-        client.getAuth().loginWithCredential(new AnonymousCredential()).continueWithTask(
-                task -> {
-                    if (!task.isSuccessful()) {
-                        Log.e("STITCH", "Login failed!");
-                        throw task.getException();
-                    }
-
-                    final Document updateDoc = new Document(
-                            "user_name",
-                            "Hello"
-                    );
-
-                    updateDoc.put("number", 42);
-                    return coll.updateOne(
-                            null, updateDoc, new RemoteUpdateOptions().upsert(true)
-                    );
-                }
-        ).continueWithTask(task -> {
-            if (!task.isSuccessful()) {
-                Log.e("STITCH", "Update failed!");
-                throw task.getException();
-            }
-            List<Document> docs = new ArrayList<>();
-            return coll
-                    .find(new Document("owner_id", client.getAuth().getUser().getId()))
-                    .limit(100)
-                    .into(docs);
-        }).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Log.d("STITCH", "Found docs: " + task.getResult().toString());
-                return;
-            }
-            Log.e("STITCH", "Error: " + task.getException().toString());
-            task.getException().printStackTrace();
-        });
+        if (getStitchClient() == null && getMongoCollection() == null) {
+            DataBaseUtils.initializeDatabase();
+        }
     }
 
     private void initializeViewVariables() {
@@ -119,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_btn:
-
+                retrieveDataFromDatabaseAndMaybeLaunchHomeActivity();
                 break;
             case R.id.new_user_textView_clickable:
                 startActivityFromLogin(CreateUserActivity.class);
@@ -127,6 +72,68 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             default:
                 Toast.makeText(this, "Action not supported", Toast.LENGTH_SHORT).show();
                 break;
+        }
+    }
+
+    private boolean areFieldsFilled() {
+        boolean canLogIn = true;
+
+        if (TextUtils.isEmpty(mUsernameEditText.getText().toString())) {
+            mUsernameEditText.setError("Required");
+            canLogIn = false;
+        }
+        if (TextUtils.isEmpty(mPasswordEditText.getText().toString())) {
+            mPasswordEditText.setError("Required");
+            canLogIn = false;
+        }
+
+        return canLogIn;
+    }
+
+    private void retrieveDataFromDatabaseAndMaybeLaunchHomeActivity() {
+        if (!areFieldsFilled()) {
+            return;
+        }
+
+        getStitchClient().getAuth().loginWithCredential(new AnonymousCredential()).continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                Log.e(STITCH, "Update failed!");
+                throw Objects.requireNonNull(task.getException());
+            }
+            List<Document> docs = new ArrayList<>();
+
+            return getMongoCollection()
+                    .find(new Document(USER_ID, getStitchClient().getAuth().getUser().getId()))
+                    .limit(100)
+                    .into(docs);
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d(STITCH,
+                        "Found docs: " + Objects.requireNonNull(task.getResult()).toString());
+
+                try {
+                    compareUserInputToDatabase(task.getResult());
+                } catch (JSONException exception) {
+                    exception.printStackTrace();
+                }
+
+                return;
+            }
+            Log.e(STITCH, "Error: " + Objects.requireNonNull(task.getException()).toString());
+            task.getException().printStackTrace();
+        });
+    }
+
+    private void compareUserInputToDatabase(List<Document> documents) throws JSONException {
+        JSONObject json = new JSONObject(documents.get(0).toJson());
+
+        if (!(mUsernameEditText.getText().toString().equals(json.get(USER_NAME)))
+            || !(mPasswordEditText.getText().toString().equals(json.get(PASSWORD)))) {
+
+            Toast.makeText(this, "Username - Password incorrect", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            startActivityFromLogin(HomeActivity.class);
         }
     }
 
