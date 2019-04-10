@@ -42,18 +42,18 @@ class UserLab {
 
     void updateCurrentUserFromDatabase() {
 
-        getStitchClient().getAuth().loginWithCredential(new AnonymousCredential()).continueWithTask(task -> {
+        getStitchClient().getAuth().loginWithCredential(
+                new AnonymousCredential()).continueWithTask(task -> {
             if (!task.isSuccessful()) {
                 Log.e(STITCH, "Update failed!");
                 throw Objects.requireNonNull(task.getException());
             }
             List<Document> docs = new ArrayList<>();
 
-            Log.d(STITCH, String.valueOf(Objects.requireNonNull(getStitchClient().getAuth().getUser()).getId()));
-
             return getMongoCollection()
-                    .find(new Document(USER_ID, getStitchClient().getAuth().getUser().getId()))
-                    .limit(100)
+                    .find(new Document(USER_ID, Objects.requireNonNull(getStitchClient()
+                            .getAuth().getUser()).getId()))
+                    .limit(1)
                     .into(docs);
         }).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

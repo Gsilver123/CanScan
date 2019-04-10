@@ -100,7 +100,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        getStitchClient().getAuth().loginWithCredential(new AnonymousCredential()).continueWithTask(task -> {
+        getStitchClient().getAuth().loginWithCredential(
+                new AnonymousCredential()).continueWithTask(task -> {
             if (!task.isSuccessful()) {
                 Log.e(STITCH, "Update failed!");
                 throw Objects.requireNonNull(task.getException());
@@ -108,8 +109,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             List<Document> docs = new ArrayList<>();
 
             return getMongoCollection()
-                    .find(new Document(USER_ID, getStitchClient().getAuth().getUser().getId()))
-                    .limit(100)
+                    .find(new Document(USER_ID, Objects.requireNonNull(getStitchClient()
+                            .getAuth().getUser()).getId()))
+                    .limit(1)
                     .into(docs);
         }).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -135,7 +137,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (!(mUsernameEditText.getText().toString().equals(json.get(USER_NAME)))
             || !(mPasswordEditText.getText().toString().equals(json.get(PASSWORD)))) {
 
-            Toast.makeText(this, "Username - Password incorrect", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                    this, "Username - Password incorrect", Toast.LENGTH_SHORT).show();
         }
         else {
             startActivityFromLogin(HomeActivity.class);

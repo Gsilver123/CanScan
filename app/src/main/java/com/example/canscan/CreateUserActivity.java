@@ -78,7 +78,8 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
             return;
         }
 
-        getStitchClient().getAuth().loginWithCredential(new AnonymousCredential()).continueWithTask(task -> {
+        getStitchClient().getAuth().loginWithCredential(
+                new AnonymousCredential()).continueWithTask(task -> {
             if (!task.isSuccessful()) {
                 Log.e("STITCH", "Login failed!");
                 throw Objects.requireNonNull(task.getException());
