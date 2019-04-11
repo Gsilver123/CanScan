@@ -1,4 +1,4 @@
-package com.example.canscan;
+package com.example.canscan.User;
 
 import android.util.Log;
 
@@ -20,15 +20,14 @@ import static com.example.canscan.DataBaseUtils.USER_NAME;
 import static com.example.canscan.DataBaseUtils.getMongoCollection;
 import static com.example.canscan.DataBaseUtils.getStitchClient;
 
-class UserLab {
+public class UserLab {
 
     private User mCurrentUser;
 
     private static UserLab sUserLab;
     private ArrayList<DatabaseObserver> mDatabaseObservers = new ArrayList<>();
-    private ArrayList<Integer> mBarcodes = new ArrayList<>();
 
-    static UserLab get() {
+    public static UserLab get() {
         if (sUserLab == null) {
             sUserLab = new UserLab();
         }
@@ -37,12 +36,11 @@ class UserLab {
 
     private UserLab() { }
 
-    User getCurrentUser() {
+    public User getCurrentUser() {
         return mCurrentUser;
     }
 
-    void updateCurrentUserFromDatabase() {
-
+    public void updateCurrentUserFromDatabase() {
         getStitchClient().getAuth().loginWithCredential(
                 new AnonymousCredential()).continueWithTask(task -> {
             if (!task.isSuccessful()) {
@@ -82,30 +80,30 @@ class UserLab {
                     .setScore(Integer.parseInt(jsonObject.get(POINTS).toString()))
                     .create();
 
-            notifyObserversDatabaseCompletedTasks();
+            notifyObserversUserUpdated();
         }
         else {
             Log.d(STITCH, "Document is empty");
         }
     }
 
-    void registerDatabaseObserver(DatabaseObserver databaseObserver) {
+    public void registerDatabaseObserver(DatabaseObserver databaseObserver) {
         if (!mDatabaseObservers.contains(databaseObserver)) {
             mDatabaseObservers.add(databaseObserver);
         }
     }
 
-    void removeDatabaseObserver(DatabaseObserver databaseObserver) {
+    public void removeDatabaseObserver(DatabaseObserver databaseObserver) {
         mDatabaseObservers.remove(databaseObserver);
     }
 
-    private void notifyObserversDatabaseCompletedTasks() {
+    public void notifyObserversUserUpdated() {
         for (DatabaseObserver databaseObserver : mDatabaseObservers) {
-            databaseObserver.notifyDatabaseCompletedTasks();
+            databaseObserver.notifyObserverUserCreatedFromDatabase();
         }
     }
 
-    interface DatabaseObserver {
-        void notifyDatabaseCompletedTasks();
+    public interface DatabaseObserver {
+        void notifyObserverUserCreatedFromDatabase();
     }
 }

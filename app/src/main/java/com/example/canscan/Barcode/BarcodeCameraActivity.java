@@ -1,4 +1,4 @@
-package com.example.canscan;
+package com.example.canscan.Barcode;
 
 import android.Manifest;
 import android.content.Context;
@@ -20,7 +20,10 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.canscan.R;
+import com.example.canscan.User.UserLab;
 import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
@@ -50,6 +53,7 @@ public class BarcodeCameraActivity extends AppCompatActivity implements View.OnC
         setBarcodeDetector();
         setCameraSource();
 
+        initializeBarcodeDetector();
         requestPermissionForCamera();
         initializeCameraSource(this);
     }
@@ -91,6 +95,20 @@ public class BarcodeCameraActivity extends AppCompatActivity implements View.OnC
                 .setRequestedPreviewSize(metrics.heightPixels, metrics.widthPixels)
                 .setAutoFocusEnabled(true)
                 .build();
+    }
+
+    private void initializeBarcodeDetector() {
+        mBarcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
+            @Override
+            public void release() {
+
+            }
+
+            @Override
+            public void receiveDetections(Detector.Detections<Barcode> detections) {
+
+            }
+        });
     }
 
     private void requestPermissionForCamera() {
@@ -166,6 +184,17 @@ public class BarcodeCameraActivity extends AppCompatActivity implements View.OnC
             if (barcodeSparseArray.size() != 0) {
                 Barcode barcode = barcodeSparseArray.valueAt(0);
                 Log.d(BARCODE, barcode.displayValue);
+
+                if (BarcodeLab.get().addBarcodeToList(barcode.displayValue)) {
+                    UserLab.get().getCurrentUser()
+                            .setScore(UserLab.get().getCurrentUser().getScore() + 3);
+                    BarcodeLab.get().updateDatabaseWithCurrentListAndPoints();
+                    UserLab.get().notifyObserversUserUpdated();
+                }
+                else {
+                    Toast.makeText(this,
+                            "Barcode already scanned", Toast.LENGTH_SHORT).show();
+                }
                 finish();
             }
             else {

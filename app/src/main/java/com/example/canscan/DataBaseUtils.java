@@ -7,25 +7,25 @@ import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
 
 import org.bson.Document;
 
-class DataBaseUtils {
+public class DataBaseUtils {
 
-    static final String STITCH = "STITCH";
+    public static final String STITCH = "STITCH";
 
     private static final String APP_CLIENT = "canscandb-cgwjo";
     private static final String SERVICE_NAME = "mongodb-atlas";
     private static final String DATABASE_NAME = "CanScanUsers";
     private static final String COLLECTION_NAME = "Users";
 
-    static final String USER_ID = "user_id";
-    static final String USER_NAME = "user_name";
-    static final String PASSWORD = "password";
-    static final String POINTS = "points";
-    static final String BARCODES = "barcodes";
+    public static final String USER_ID = "user_id";
+    public static final String USER_NAME = "user_name";
+    public static final String PASSWORD = "password";
+    public static final String POINTS = "points";
+    public static final String BARCODES = "barcodes";
 
     private static StitchAppClient mClient;
     private static RemoteMongoCollection<Document> mCollection;
 
-    static void initializeDatabase() {
+    public static void initializeDatabase() {
         mClient = Stitch.initializeDefaultAppClient(APP_CLIENT);
         mCollection = mClient
                 .getServiceClient(RemoteMongoClient.factory, SERVICE_NAME)
@@ -33,11 +33,11 @@ class DataBaseUtils {
                 .getCollection(COLLECTION_NAME);
     }
 
-    static StitchAppClient getStitchClient() {
+    public static StitchAppClient getStitchClient() {
         return mClient;
     }
 
-    static RemoteMongoCollection<Document> getMongoCollection() {
+    public static RemoteMongoCollection<Document> getMongoCollection() {
         return mCollection;
     }
 }

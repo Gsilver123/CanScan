@@ -23,10 +23,10 @@
         <activity android:name=".CreateUserActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".HomeActivity"
+        <activity android:name=".Home.HomeActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".BarcodeCameraActivity"
+        <activity android:name=".Barcode.BarcodeCameraActivity"
             android:screenOrientation="portrait" >
         </activity>
     </application>
