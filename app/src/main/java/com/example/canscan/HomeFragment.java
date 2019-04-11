@@ -1,5 +1,6 @@
 package com.example.canscan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -66,7 +67,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.scan_code_btn:
-                Toast.makeText(getContext(), "Barcode scanner", Toast.LENGTH_SHORT).show();
+                startCameraActivity();
                 break;
             case R.id.leader_board_btn:
                 Toast.makeText(getContext(), "Leader Boards", Toast.LENGTH_SHORT).show();
@@ -81,5 +82,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
                 Toast.makeText(getContext(), "Action not supported", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private void startCameraActivity() {
+        Intent intent = new Intent(getContext(), BarcodeCameraActivity.class);
+        startActivity(intent);
     }
 }

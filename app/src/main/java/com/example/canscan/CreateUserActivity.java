@@ -16,8 +16,10 @@ import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateOptions;
 
 import org.bson.Document;
 
+import java.util.Arrays;
 import java.util.Objects;
 
+import static com.example.canscan.DataBaseUtils.BARCODES;
 import static com.example.canscan.DataBaseUtils.PASSWORD;
 import static com.example.canscan.DataBaseUtils.POINTS;
 import static com.example.canscan.DataBaseUtils.STITCH;
@@ -90,9 +92,10 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                     Objects.requireNonNull(task.getResult()).getId()
             );
 
-            updateDoc.put(USER_NAME, mUsernameEditText.getText().toString().toLowerCase());
-            updateDoc.put(PASSWORD, mPasswordEditText.getText().toString().toLowerCase());
-            updateDoc.put(POINTS, 0);
+            updateDoc.append(USER_NAME, mUsernameEditText.getText().toString().toLowerCase());
+            updateDoc.append(PASSWORD, mPasswordEditText.getText().toString().toLowerCase());
+            updateDoc.append(POINTS, 0);
+            updateDoc.append(BARCODES, Arrays.asList());
 
             return getMongoCollection().updateOne(
                     null, updateDoc, new RemoteUpdateOptions().upsert(true)

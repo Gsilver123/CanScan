@@ -26,6 +26,7 @@ class UserLab {
 
     private static UserLab sUserLab;
     private ArrayList<DatabaseObserver> mDatabaseObservers = new ArrayList<>();
+    private ArrayList<Integer> mBarcodes = new ArrayList<>();
 
     static UserLab get() {
         if (sUserLab == null) {

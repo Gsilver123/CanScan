@@ -20,6 +20,7 @@ class DataBaseUtils {
     static final String USER_NAME = "user_name";
     static final String PASSWORD = "password";
     static final String POINTS = "points";
+    static final String BARCODES = "barcodes";
 
     private static StitchAppClient mClient;
     private static RemoteMongoCollection<Document> mCollection;
