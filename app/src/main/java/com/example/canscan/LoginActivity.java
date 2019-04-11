@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.canscan.Home.HomeActivity;
 import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
 
 import org.bson.Document;
@@ -132,6 +133,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void compareUserInputToDatabase(List<Document> documents) throws JSONException {
+        if (documents.get(0) == null) {
+            return;
+        }
+
         JSONObject json = new JSONObject(documents.get(0).toJson());
 
         if (!(mUsernameEditText.getText().toString().equals(json.get(USER_NAME)))

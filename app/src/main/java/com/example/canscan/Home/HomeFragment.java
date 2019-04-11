@@ -1,5 +1,6 @@
-package com.example.canscan;
+package com.example.canscan.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,9 +11,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.canscan.UserLab.DatabaseObserver;
+import com.example.canscan.Barcode.BarcodeCameraActivity;
+import com.example.canscan.R;
+import com.example.canscan.User.UserLab;
+import com.example.canscan.User.UserLab.DatabaseObserver;
 
-public class HomeFragment extends Fragment implements View.OnClickListener, DatabaseObserver {
+public class HomeFragment extends Fragment implements View.OnClickListener, DatabaseObserver{
 
     private TextView mPointsEarned;
     private Button mScanCodeButton;
@@ -58,7 +62,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
     }
 
     @Override
-    public void notifyDatabaseCompletedTasks() {
+    public void notifyObserverUserCreatedFromDatabase() {
         mPointsEarned.setText(String.valueOf(UserLab.get().getCurrentUser().getScore()));
     }
 
@@ -66,7 +70,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.scan_code_btn:
-                Toast.makeText(getContext(), "Barcode scanner", Toast.LENGTH_SHORT).show();
+                startCameraActivity();
                 break;
             case R.id.leader_board_btn:
                 Toast.makeText(getContext(), "Leader Boards", Toast.LENGTH_SHORT).show();
@@ -81,5 +85,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
                 Toast.makeText(getContext(), "Action not supported", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private void startCameraActivity() {
+        Intent intent = new Intent(getContext(), BarcodeCameraActivity.class);
+        startActivity(intent);
     }
 }

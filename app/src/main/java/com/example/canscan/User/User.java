@@ -1,4 +1,4 @@
-package com.example.canscan;
+package com.example.canscan.User;
 
 public class User {
 
@@ -12,15 +12,15 @@ public class User {
         mScore = score;
     }
 
-    String getUsername() {
+    public String getUsername() {
         return mUsername;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return mPassword;
     }
 
-    int getScore() {
+    public int getScore() {
         return mScore;
     }
 
