@@ -2,12 +2,14 @@ package com.example.canscan.Barcode;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,7 +20,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.canscan.R;
 import com.example.canscan.User.UserLab;
@@ -186,23 +187,44 @@ public class BarcodeCameraActivity extends AppCompatActivity implements View.OnC
                 Log.d(BARCODE, barcode.displayValue);
 
                 if (BarcodeLab.get().addBarcodeToList(barcode.displayValue)) {
-                    UserLab.get().getCurrentUser()
-                            .setScore(UserLab.get().getCurrentUser().getScore() + 3);
-                    BarcodeLab.get().updateDatabaseWithCurrentListAndPoints();
-                    UserLab.get().notifyObserversUserUpdated();
+                    addPointsFromBarcode(30);
+                    finish();
                 }
                 else {
-                    Toast.makeText(this,
-                            "Barcode already scanned", Toast.LENGTH_SHORT).show();
+                    addPointsFromBarcode(3);
+
+                    AlertDialog dialog = new AlertDialog.Builder(this)
+                            .setMessage("Barcode already scanned")
+                            .setNeutralButton("Ok", (dialog1, which) -> {
+                                dialog1.dismiss();
+                            })
+                            .setOnDismissListener(dialog12 -> {
+                                finish();
+                            })
+                            .create();
+
+                    dialog.show();
                 }
-                finish();
             }
             else {
                 Log.d(BARCODE, "Barcode didn't scan");
-                Toast.makeText(this,
-                        "Barcode didn't scan properly. Please try again",
-                        Toast.LENGTH_SHORT).show();
+
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setMessage("Barcode didn't scan properly. Please try again")
+                        .setNeutralButton("Ok", (dialog1, which) -> {
+                            dialog1.dismiss();
+                        })
+                        .create();
+
+                dialog.show();
             }
         });
+    }
+
+    private void addPointsFromBarcode(int addedPoints) {
+        UserLab.get().getCurrentUser()
+                .setScore(UserLab.get().getCurrentUser().getScore() + addedPoints);
+        BarcodeLab.get().updateDatabaseWithCurrentListAndPoints();
+        UserLab.get().notifyObserversUserUpdated(false);
     }
 }

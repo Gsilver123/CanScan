@@ -73,8 +73,6 @@ public class BarcodeLab {
             if (task.isSuccessful()) {
                 Log.d(STITCH,
                         "Found docs: " + Objects.requireNonNull(task.getResult()).toString());
-
-
                 return;
             }
             Log.e(STITCH, "Error: " + Objects.requireNonNull(task.getException()).toString());

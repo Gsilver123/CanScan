@@ -16,7 +16,7 @@ import com.example.canscan.R;
 import com.example.canscan.User.UserLab;
 import com.example.canscan.User.UserLab.DatabaseObserver;
 
-public class HomeFragment extends Fragment implements View.OnClickListener, DatabaseObserver{
+public class HomeFragment extends Fragment implements View.OnClickListener, DatabaseObserver {
 
     private TextView mPointsEarned;
     private Button mScanCodeButton;
@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
     }
 
     @Override
-    public void notifyObserverUserCreatedFromDatabase() {
+    public void notifyObserverUserCreatedFromDatabase(boolean shouldPullFromDatabase) {
         mPointsEarned.setText(String.valueOf(UserLab.get().getCurrentUser().getScore()));
     }
 

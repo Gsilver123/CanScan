@@ -1,7 +1,6 @@
 package com.example.canscan.Home;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,8 +13,9 @@ import com.example.canscan.User.UserLab;
 import static com.example.canscan.DataBaseUtils.STITCH;
 import static com.example.canscan.DataBaseUtils.getMongoCollection;
 import static com.example.canscan.DataBaseUtils.getStitchClient;
+import com.example.canscan.User.UserLab.DatabaseObserver;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements DatabaseObserver {
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -27,16 +27,27 @@ public class HomeActivity extends AppCompatActivity {
             Log.d(STITCH, "ReInitialize Database");
         }
 
+        UserLab.get().registerDatabaseObserver(this);
         UserLab.get().updateCurrentUserFromDatabase();
-        new Handler().postDelayed(() ->
-                BarcodeLab.get().pullBarcodeListFromDatabase(), 1000);
-
         startHomeFragment();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        UserLab.get().removeDatabaseObserver(this);
     }
 
     private void startHomeFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_fragment_container, new HomeFragment());
         transaction.commit();
+    }
+
+    @Override
+    public void notifyObserverUserCreatedFromDatabase(boolean shouldPullFromDatabase) {
+        if (shouldPullFromDatabase) {
+            BarcodeLab.get().pullBarcodeListFromDatabase();
+        }
     }
 }

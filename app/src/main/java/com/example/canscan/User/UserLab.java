@@ -80,7 +80,7 @@ public class UserLab {
                     .setScore(Integer.parseInt(jsonObject.get(POINTS).toString()))
                     .create();
 
-            notifyObserversUserUpdated();
+            notifyObserversUserUpdated(true);
         }
         else {
             Log.d(STITCH, "Document is empty");
@@ -97,13 +97,13 @@ public class UserLab {
         mDatabaseObservers.remove(databaseObserver);
     }
 
-    public void notifyObserversUserUpdated() {
+    public void notifyObserversUserUpdated(boolean shouldPullFromDatabase) {
         for (DatabaseObserver databaseObserver : mDatabaseObservers) {
-            databaseObserver.notifyObserverUserCreatedFromDatabase();
+            databaseObserver.notifyObserverUserCreatedFromDatabase(shouldPullFromDatabase);
         }
     }
 
     public interface DatabaseObserver {
-        void notifyObserverUserCreatedFromDatabase();
+        void notifyObserverUserCreatedFromDatabase(boolean shouldPushToDatabase);
     }
 }
