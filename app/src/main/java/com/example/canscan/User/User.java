@@ -28,6 +28,16 @@ public class User {
         mScore = score;
     }
 
+    public int compareTo(User user) {
+        if (mScore > user.getScore()) {
+            return -1;
+        }
+        else if (mScore == user.getScore()) {
+            return 0;
+        }
+        return 1;
+    }
+
     static class Builder {
 
         private String mBuilderUsername;

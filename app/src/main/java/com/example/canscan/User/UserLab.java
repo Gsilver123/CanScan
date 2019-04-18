@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +28,7 @@ public class UserLab {
 
     private static UserLab sUserLab;
     private ArrayList<DatabaseObserver> mDatabaseObservers = new ArrayList<>();
+    private ArrayList<User> mLeaderBoardUsers;
 
     public static UserLab get() {
         if (sUserLab == null) {
@@ -87,6 +90,27 @@ public class UserLab {
         }
     }
 
+    public void createLeaderBoardList() {
+        mLeaderBoardUsers = new ArrayList<>();
+
+        for (String name : RandomNameList.nameList) {
+            User user = new User.Builder()
+                    .setUsername(name)
+                    .setPassword("password")
+                    .setScore((int) (Math.random() * (10000)))
+                    .create();
+
+            mLeaderBoardUsers.add(user);
+        }
+        mLeaderBoardUsers.add(mCurrentUser);
+
+        Collections.sort(mLeaderBoardUsers, new UserComparator());
+    }
+
+    public ArrayList<User> getLeaderBoardUserList() {
+        return mLeaderBoardUsers;
+    }
+
     public void registerDatabaseObserver(DatabaseObserver databaseObserver) {
         if (!mDatabaseObservers.contains(databaseObserver)) {
             mDatabaseObservers.add(databaseObserver);
@@ -105,5 +129,20 @@ public class UserLab {
 
     public interface DatabaseObserver {
         void notifyObserverUserCreatedFromDatabase(boolean shouldPushToDatabase);
+    }
+
+    private static class RandomNameList {
+
+        static final String[] nameList =  {"Mary", "Anna", "Emma", "Elizabeth", "Minnie", "Margaret",
+            "Ida", "Alice", "Bertha", "Sarah", "Angelina", "Corrie", "Maye", "Harry", "Fred", "David",
+            "Joe", "Charlie", "Richard", "Will", "Oscar", "Robert", "Frank", "Thomas", "Charles"};
+    }
+
+    private static class UserComparator implements Comparator<User> {
+
+        @Override
+        public int compare(User left, User right) {
+            return left.compareTo(right);
+        }
     }
 }
