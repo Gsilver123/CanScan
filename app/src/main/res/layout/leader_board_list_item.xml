@@ -31,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:maxLength="12"
         app:layout_constraintStart_toStartOf="@id/username_start_vertical_guideline"
         app:layout_constraintTop_toBottomOf="@id/green_divider_line_top"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -40,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="@id/points_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/green_divider_line_top"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -56,13 +57,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".25"/>
+        app:layout_constraintGuide_percent=".2"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/points_start_vertical_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".75"/>
+        app:layout_constraintGuide_percent=".675"/>
 
 </android.support.constraint.ConstraintLayout>

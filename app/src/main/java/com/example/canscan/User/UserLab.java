@@ -94,17 +94,45 @@ public class UserLab {
         mLeaderBoardUsers = new ArrayList<>();
 
         for (String name : RandomNameList.nameList) {
-            User user = new User.Builder()
-                    .setUsername(name)
-                    .setPassword("password")
-                    .setScore((int) (Math.random() * (10000)))
-                    .create();
-
-            mLeaderBoardUsers.add(user);
+            mLeaderBoardUsers.add(createUser(name,
+                    "password",
+                    (int) (Math.random() * (10000))));
         }
         mLeaderBoardUsers.add(mCurrentUser);
+        mLeaderBoardUsers.add(createUser("Byron B",
+                "mayor",
+                18000 + (int) (Math.random() * (100000))));
+        mLeaderBoardUsers.add(createUser("Amy K",
+                "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Cletis E",
+                "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Gerard A",
+                    "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Jacquelyn M",
+                    "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Josep J",
+                    "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Justin B",
+                    "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Luis T",
+                    "password",
+                10000 + (int) (Math.random() * (20000))));
 
         Collections.sort(mLeaderBoardUsers, new UserComparator());
+    }
+
+    private User createUser(String name, String password, int score) {
+        return new User.Builder()
+                .setUsername(name)
+                .setPassword(password)
+                .setScore(score)
+                .create();
     }
 
     public ArrayList<User> getLeaderBoardUserList() {
