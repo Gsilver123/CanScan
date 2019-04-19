@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.canscan.Barcode.BarcodeCameraActivity;
 import com.example.canscan.LeaderBoardFragment;
 import com.example.canscan.R;
+import com.example.canscan.RewardsFragment;
 import com.example.canscan.User.UserLab;
 import com.example.canscan.User.UserLab.DatabaseObserver;
 
@@ -80,7 +81,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
                 startFragment(new LeaderBoardFragment());
                 break;
             case R.id.rewards_btn:
-                Toast.makeText(getContext(), "Rewards", Toast.LENGTH_SHORT).show();
+                startFragment(new RewardsFragment());
                 break;
             case R.id.settings_btn:
                 Toast.makeText(getContext(), "Settings", Toast.LENGTH_SHORT).show();

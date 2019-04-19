@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:id="@+id/redeem_starting_r_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/capital_r"
+        android:textSize="45sp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="@id/redeem_start_vertical_guideline"
+        app:layout_constraintEnd_toStartOf="@id/redeem_textView"
+        app:layout_constraintTop_toBottomOf="@id/redeem_top_horizontal_guideline"/>
+
+    <TextView
+        android:id="@+id/redeem_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/top_r"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/redeem_starting_r_textView"
+        app:layout_constraintTop_toTopOf="@id/redeem_starting_r_textView"
+        app:layout_constraintBottom_toBottomOf="@id/redeem_starting_r_textView" />
+
+    <TextView
+        android:id="@+id/recycle_starting_r_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/capital_r"
+        android:textSize="55sp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toStartOf="@id/recycle_textView"
+        app:layout_constraintStart_toStartOf="@id/redeem_starting_r_textView"
+        app:layout_constraintTop_toBottomOf="@id/redeem_textView"/>
+
+    <TextView
+        android:id="@+id/recycle_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/center_r"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/recycle_starting_r_textView"
+        app:layout_constraintTop_toTopOf="@id/recycle_starting_r_textView"
+        app:layout_constraintBottom_toBottomOf="@id/recycle_starting_r_textView"
+        app:layout_constraintEnd_toEndOf="@id/redeem_textView"/>
+
+    <TextView
+        android:id="@+id/rewards_starting_r_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/capital_r"
+        android:textSize="65sp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="@id/recycle_starting_r_textView"
+        app:layout_constraintEnd_toStartOf="@id/rewards_textView"
+        app:layout_constraintTop_toBottomOf="@id/recycle_textView"/>
+
+    <TextView
+        android:id="@+id/rewards_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lower_r"
+        android:textSize="45sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/rewards_starting_r_textView"
+        app:layout_constraintEnd_toEndOf="@id/recycle_textView"
+        app:layout_constraintTop_toTopOf="@id/rewards_starting_r_textView"
+        app:layout_constraintBottom_toBottomOf="@id/rewards_starting_r_textView"/>
+
+    <View
+        android:id="@+id/rewards_horizontal_divider_line"
+        android:layout_width="0dp"
+        android:layout_height="6dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="@id/rewards_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/rewards_end_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/rewards_textView"/>
+
+
+    <Button
+        android:id="@+id/metro_rewards_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/nfta_btn_text"
+        android:textSize="20sp"
+        android:textColor="@color/off_black"
+        android:drawableEnd="@drawable/nfta_logo"
+        android:background="@drawable/rewards_btn_rectangle_bg"
+        android:paddingEnd="8dp"
+        app:layout_constraintTop_toTopOf="@id/metro_rewards_btn_top_guideline"
+        app:layout_constraintStart_toStartOf="@id/rewards_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/rewards_end_vertical_guideline"/>
+
+    <Button
+        android:id="@+id/bike_rewards_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/bike_btn_text"
+        android:textSize="20sp"
+        android:textColor="@color/off_black"
+        android:drawableEnd="@drawable/bike_share_logo"
+        android:background="@drawable/rewards_btn_rectangle_bg"
+        android:paddingEnd="8dp"
+        app:layout_constraintTop_toTopOf="@id/bike_rewards_btn_top_guideline"
+        app:layout_constraintStart_toStartOf="@id/rewards_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/rewards_end_vertical_guideline"/>
+
+    <Button
+        android:id="@+id/bills_rewards_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/bills_btn_text"
+        android:textSize="20sp"
+        android:textColor="@color/off_black"
+        android:drawableEnd="@drawable/bills_logo"
+        android:background="@drawable/rewards_btn_rectangle_bg"
+        android:paddingEnd="8dp"
+        app:layout_constraintStart_toStartOf="@id/rewards_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/rewards_end_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/bills_rewards_btn_top_guideline"/>
+
+    <Button
+        android:id="@+id/sabres_rewards_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sabres_btn_text"
+        android:textSize="20sp"
+        android:textColor="@color/off_black"
+        android:drawableEnd="@drawable/sabres_logo"
+        android:background="@drawable/rewards_btn_rectangle_bg"
+        android:paddingEnd="8dp"
+        app:layout_constraintStart_toStartOf="@id/rewards_start_vertical_guideline"
+        app:layout_constraintEnd_toEndOf="@id/rewards_end_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/sabres_rewards_btn_top_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/redeem_start_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".385" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/redeem_top_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".075" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/rewards_start_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".2"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/rewards_end_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".775"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/metro_rewards_btn_top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".425"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/bike_rewards_btn_top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".55"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/bills_rewards_btn_top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".675"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/sabres_rewards_btn_top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".8"/>
+
+</android.support.constraint.ConstraintLayout>

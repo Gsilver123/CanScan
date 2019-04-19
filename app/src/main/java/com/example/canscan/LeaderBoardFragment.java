@@ -62,12 +62,17 @@ public class LeaderBoardFragment extends Fragment {
         void bind(User user, int position) {
             mPositionTextView.setText(String.valueOf(position + 1));
             mUsernameTextView.setText(user.getUsername());
-            mPointsTextView.setText(String.valueOf(user.getScore()));
+            mPointsTextView.setText(String.valueOf(user.getTotalScore()));
 
-            colorRanking(position + 1);
+            try {
+                colorRanking(position + 1);
+            }
+            catch (NullPointerException exception) {
+                exception.printStackTrace();
+            }
         }
 
-        void colorRanking(int position) {
+        void colorRanking(int position) throws NullPointerException {
             switch (position) {
                 case 1:
                     mPositionTextView.setTextColor(getContext().getColor(R.color.gold));

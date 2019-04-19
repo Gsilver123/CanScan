@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 try {
                     compareUserInputToDatabase(task.getResult());
-                } catch (JSONException exception) {
+                } catch (JSONException | IndexOutOfBoundsException exception) {
                     exception.printStackTrace();
                 }
 
@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private void compareUserInputToDatabase(List<Document> documents) throws JSONException {
+    private void compareUserInputToDatabase(List<Document> documents) throws JSONException, IndexOutOfBoundsException {
         try {
             documents.get(0);
         }

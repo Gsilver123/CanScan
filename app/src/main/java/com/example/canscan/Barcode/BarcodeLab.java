@@ -16,9 +16,13 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.example.canscan.DataBaseUtils.BARCODES;
+import static com.example.canscan.DataBaseUtils.BIKE;
+import static com.example.canscan.DataBaseUtils.METRO;
 import static com.example.canscan.DataBaseUtils.PASSWORD;
 import static com.example.canscan.DataBaseUtils.POINTS;
 import static com.example.canscan.DataBaseUtils.STITCH;
+import static com.example.canscan.DataBaseUtils.TICKETS;
+import static com.example.canscan.DataBaseUtils.TOTAL_POINTS;
 import static com.example.canscan.DataBaseUtils.USER_ID;
 import static com.example.canscan.DataBaseUtils.USER_NAME;
 import static com.example.canscan.DataBaseUtils.getMongoCollection;
@@ -63,7 +67,11 @@ public class BarcodeLab {
 
             updateDoc.append(USER_NAME, UserLab.get().getCurrentUser().getUsername());
             updateDoc.append(PASSWORD, UserLab.get().getCurrentUser().getPassword());
+            updateDoc.append(TOTAL_POINTS, UserLab.get().getCurrentUser().getTotalScore());
             updateDoc.append(POINTS, UserLab.get().getCurrentUser().getScore());
+            updateDoc.append(METRO, UserLab.get().getCurrentUser().getMetroTickets());
+            updateDoc.append(BIKE, UserLab.get().getCurrentUser().getBikeTickets());
+            updateDoc.append(TICKETS, UserLab.get().getCurrentUser().getGameTickets());
             updateDoc.append(BARCODES, mBarcodes);
 
             return getMongoCollection().updateOne(
@@ -126,6 +134,7 @@ public class BarcodeLab {
         Log.d(STITCH, jsonArray.toString());
 
         UserLab.get().getCurrentUser().setScore(Integer.parseInt(jsonObject.get(POINTS).toString()));
+        UserLab.get().getCurrentUser().setTotalScore(Integer.parseInt(jsonObject.get(TOTAL_POINTS).toString()));
 
         mBarcodes = new ArrayList<>();
 

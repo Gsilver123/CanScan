@@ -19,7 +19,11 @@ public class DataBaseUtils {
     public static final String USER_ID = "user_id";
     public static final String USER_NAME = "user_name";
     public static final String PASSWORD = "password";
+    public static final String TOTAL_POINTS = "total_points";
     public static final String POINTS = "points";
+    public static final String METRO = "metro";
+    public static final String BIKE = "bike";
+    public static final String TICKETS = "tickets";
     public static final String BARCODES = "barcodes";
 
     private static StitchAppClient mClient;
