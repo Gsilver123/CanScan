@@ -63,7 +63,7 @@ public class UserLab {
                 try {
                     updateCurrentUserFromJson(Objects.requireNonNull(task.getResult()));
                 }
-                catch (JSONException exception) {
+                catch (JSONException | IndexOutOfBoundsException exception) {
                     Log.d(STITCH, exception.getLocalizedMessage());
                 }
                 return;
@@ -73,7 +73,8 @@ public class UserLab {
         });
     }
 
-    private void updateCurrentUserFromJson(List<Document> userDocument) throws JSONException {
+    private void updateCurrentUserFromJson(List<Document> userDocument)
+            throws JSONException, IndexOutOfBoundsException {
         if (userDocument.get(0) != null) {
             JSONObject jsonObject = new JSONObject(userDocument.get(0));
 

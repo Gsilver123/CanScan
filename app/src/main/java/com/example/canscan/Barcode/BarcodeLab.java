@@ -97,12 +97,13 @@ public class BarcodeLab {
         }).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Log.d(STITCH,
-                        "Found docs when pulling from database: " + Objects.requireNonNull(task.getResult()).toString());
+                        "Found docs when pulling from database: "
+                                + Objects.requireNonNull(task.getResult()).toString());
 
                 try {
                     retrieveBarcodeListAndPointsFromDocument(task.getResult());
                 }
-                catch (JSONException | NullPointerException exception) {
+                catch (JSONException | NullPointerException | IndexOutOfBoundsException exception) {
                     Log.d(STITCH, "Cannot parse JSON Object");
                 }
 
@@ -113,7 +114,9 @@ public class BarcodeLab {
         });
     }
 
-    private void retrieveBarcodeListAndPointsFromDocument(List<Document> documentList) throws JSONException, NullPointerException {
+    private void retrieveBarcodeListAndPointsFromDocument(List<Document> documentList)
+            throws JSONException, NullPointerException, IndexOutOfBoundsException {
+
         if (documentList.get(0) == null) {
             return;
         }
