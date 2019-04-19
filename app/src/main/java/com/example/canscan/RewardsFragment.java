@@ -76,12 +76,15 @@ public class RewardsFragment extends Fragment implements View.OnClickListener {
             switch (pointsWorth) {
                 case NFTA_REWARD_POINTS:
                     Toast.makeText(getContext(), "Congrats on the free Metro Ride!", Toast.LENGTH_SHORT).show();
+                    UserLab.get().getCurrentUser().setMetroTickets(UserLab.get().getCurrentUser().getMetroTickets() + 1);
                     break;
                 case BIKE_SHARE_REWARDS_POINTS:
                     Toast.makeText(getContext(), "Congrats on the free Bike Share!", Toast.LENGTH_SHORT).show();
+                    UserLab.get().getCurrentUser().setBikeTickets(UserLab.get().getCurrentUser().getBikeTickets() + 1);
                     break;
                 case BILLS_REWARDS_POINTS:
                     Toast.makeText(getContext(), "Congrats on the free Ticket!", Toast.LENGTH_SHORT).show();
+                    UserLab.get().getCurrentUser().setGameTickets(UserLab.get().getCurrentUser().getGameTickets() + 1);
                     break;
                 default:
                     break;

@@ -14,9 +14,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
+import static com.example.canscan.DataBaseUtils.BIKE;
+import static com.example.canscan.DataBaseUtils.METRO;
 import static com.example.canscan.DataBaseUtils.PASSWORD;
 import static com.example.canscan.DataBaseUtils.POINTS;
 import static com.example.canscan.DataBaseUtils.STITCH;
+import static com.example.canscan.DataBaseUtils.TICKETS;
+import static com.example.canscan.DataBaseUtils.TOTAL_POINTS;
 import static com.example.canscan.DataBaseUtils.USER_ID;
 import static com.example.canscan.DataBaseUtils.USER_NAME;
 import static com.example.canscan.DataBaseUtils.getMongoCollection;
@@ -75,13 +79,18 @@ public class UserLab {
 
     private void updateCurrentUserFromJson(List<Document> userDocument)
             throws JSONException, IndexOutOfBoundsException {
+
         if (userDocument.get(0) != null) {
             JSONObject jsonObject = new JSONObject(userDocument.get(0));
 
             mCurrentUser = new User.Builder()
                     .setUsername(jsonObject.get(USER_NAME).toString())
                     .setPassword(jsonObject.get(PASSWORD).toString())
+                    .setTotalScore(Integer.parseInt(jsonObject.get(TOTAL_POINTS).toString()))
                     .setScore(Integer.parseInt(jsonObject.get(POINTS).toString()))
+                    .setMetroTickets(Integer.parseInt(jsonObject.get(METRO).toString()))
+                    .setBikeTickets(Integer.parseInt(jsonObject.get(BIKE).toString()))
+                    .setGameTickets(Integer.parseInt(jsonObject.get(TICKETS).toString()))
                     .create();
 
             notifyObserversUserUpdated(true);
@@ -94,45 +103,43 @@ public class UserLab {
     public void createLeaderBoardList() {
         mLeaderBoardUsers = new ArrayList<>();
 
+        int mayorScore = 35000 + (int) (Math.random() * (100000));
+        int amyScore = 10000 + (int) (Math.random() * (50000));
+        int cletisScore = 10000 + (int) (Math.random() * (50000));
+        int gerardScore = 10000 + (int) (Math.random() * (50000));
+        int jacquelynScore = 10000 + (int) (Math.random() * (50000));
+        int josepScore = 10000 + (int) (Math.random() * (50000));
+        int justinScore = 10000 + (int) (Math.random() * (50000));
+        int luisScore = 10000 + (int) (Math.random() * (50000));
+
         for (String name : RandomNameList.nameList) {
-            mLeaderBoardUsers.add(createUser(name,
-                    "password",
-                    (int) (Math.random() * (10000))));
+            int standardScore = (int) (Math.random() * (10000));
+
+            mLeaderBoardUsers.add(createUser(name, "password", standardScore, standardScore));
         }
+
         mLeaderBoardUsers.add(mCurrentUser);
-        mLeaderBoardUsers.add(createUser("Byron B",
-                "mayor",
-                18000 + (int) (Math.random() * (100000))));
-        mLeaderBoardUsers.add(createUser("Amy K",
-                "password",
-                10000 + (int) (Math.random() * (20000))));
-        mLeaderBoardUsers.add(createUser("Cletis E",
-                "password",
-                10000 + (int) (Math.random() * (20000))));
-        mLeaderBoardUsers.add(createUser("Gerard A",
-                    "password",
-                10000 + (int) (Math.random() * (20000))));
-        mLeaderBoardUsers.add(createUser("Jacquelyn M",
-                    "password",
-                10000 + (int) (Math.random() * (20000))));
-        mLeaderBoardUsers.add(createUser("Josep J",
-                    "password",
-                10000 + (int) (Math.random() * (20000))));
-        mLeaderBoardUsers.add(createUser("Justin B",
-                    "password",
-                10000 + (int) (Math.random() * (20000))));
-        mLeaderBoardUsers.add(createUser("Luis T",
-                    "password",
-                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Byron B", "mayor", mayorScore, mayorScore));
+        mLeaderBoardUsers.add(createUser("Amy K", "password", amyScore, amyScore));
+        mLeaderBoardUsers.add(createUser("Cletis E", "password", cletisScore, cletisScore));
+        mLeaderBoardUsers.add(createUser("Gerard A", "password", gerardScore, gerardScore));
+        mLeaderBoardUsers.add(createUser("Jacquelyn M", "password", jacquelynScore, jacquelynScore));
+        mLeaderBoardUsers.add(createUser("Josep J", "password", josepScore, josepScore));
+        mLeaderBoardUsers.add(createUser("Justin B", "password", justinScore, justinScore));
+        mLeaderBoardUsers.add(createUser("Luis T", "password", luisScore, luisScore));
 
         Collections.sort(mLeaderBoardUsers, new UserComparator());
     }
 
-    private User createUser(String name, String password, int score) {
+    private User createUser(String name, String password, int totalScore, int score) {
         return new User.Builder()
                 .setUsername(name)
                 .setPassword(password)
+                .setTotalScore(totalScore)
                 .setScore(score)
+                .setMetroTickets(0)
+                .setBikeTickets(0)
+                .setGameTickets(0)
                 .create();
     }
 
