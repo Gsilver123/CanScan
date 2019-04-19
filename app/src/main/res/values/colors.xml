@@ -10,4 +10,6 @@
     <color name="gold">#ffd800</color>
     <color name="silver">#c0c0c0</color>
     <color name="bronze">#cd7f32</color>
+
+    <color name="off_black">#464141</color>
 </resources>
