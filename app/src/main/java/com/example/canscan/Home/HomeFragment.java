@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.canscan.Barcode.BarcodeCameraActivity;
+import com.example.canscan.LeaderBoardFragment;
 import com.example.canscan.R;
 import com.example.canscan.User.UserLab;
 import com.example.canscan.User.UserLab.DatabaseObserver;
+
+import java.util.Objects;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, DatabaseObserver {
 
@@ -73,7 +77,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
                 startCameraActivity();
                 break;
             case R.id.leader_board_btn:
-                Toast.makeText(getContext(), "Leader Boards", Toast.LENGTH_SHORT).show();
+                startFragment(new LeaderBoardFragment());
                 break;
             case R.id.rewards_btn:
                 Toast.makeText(getContext(), "Rewards", Toast.LENGTH_SHORT).show();
@@ -90,5 +94,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
     private void startCameraActivity() {
         Intent intent = new Intent(getContext(), BarcodeCameraActivity.class);
         startActivity(intent);
+    }
+
+    private void startFragment(Fragment fragment) {
+        FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.main_fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

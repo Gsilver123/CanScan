@@ -1,6 +1,7 @@
 package com.example.canscan;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -133,7 +134,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void compareUserInputToDatabase(List<Document> documents) throws JSONException {
-        if (documents.get(0) == null) {
+        try {
+            documents.get(0);
+        }
+        catch (IndexOutOfBoundsException exception) {
+            Log.d(STITCH, "No document found");
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setMessage("User not found")
+                    .setNeutralButton("Ok", (dialogInterface, which) -> {
+                        dialogInterface.dismiss();
+                    })
+                    .create();
+            dialog.show();
             return;
         }
 

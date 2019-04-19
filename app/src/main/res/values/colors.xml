@@ -6,4 +6,8 @@
 
     <color name="grey">#cccccc</color>
     <color name="white">#ffffff</color>
+    
+    <color name="gold">#ffd800</color>
+    <color name="silver">#c0c0c0</color>
+    <color name="bronze">#cd7f32</color>
 </resources>

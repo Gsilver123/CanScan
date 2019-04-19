@@ -2,7 +2,7 @@ package com.example.canscan.Barcode;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -48,6 +48,8 @@ public class BarcodeCameraActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.barcode_camera_scanner);
 
+        requestPermissionForCamera();
+
         initializeViewVariables();
         setOnClickListeners();
 
@@ -55,7 +57,6 @@ public class BarcodeCameraActivity extends AppCompatActivity implements View.OnC
         setCameraSource();
 
         initializeBarcodeDetector();
-        requestPermissionForCamera();
         initializeCameraSource(this);
     }
 
@@ -129,7 +130,9 @@ public class BarcodeCameraActivity extends AppCompatActivity implements View.OnC
         if (MY_CAMERA_PERMISSIONS == requestCode) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                initializeCameraSource(this);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         }
     }
@@ -157,7 +160,12 @@ public class BarcodeCameraActivity extends AppCompatActivity implements View.OnC
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-                mCameraSource.release();
+                try {
+                    mCameraSource.release();
+                }
+                catch (NullPointerException exception) {
+                    exception.printStackTrace();
+                }
             }
         });
     }
@@ -195,10 +203,10 @@ public class BarcodeCameraActivity extends AppCompatActivity implements View.OnC
 
                     AlertDialog dialog = new AlertDialog.Builder(this)
                             .setMessage("Barcode already scanned")
-                            .setNeutralButton("Ok", (dialog1, which) -> {
-                                dialog1.dismiss();
+                            .setNeutralButton("Ok", (dialogInterface, which) -> {
+                                dialogInterface.dismiss();
                             })
-                            .setOnDismissListener(dialog12 -> {
+                            .setOnDismissListener(dialogInterface -> {
                                 finish();
                             })
                             .create();

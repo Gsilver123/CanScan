@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +28,7 @@ public class UserLab {
 
     private static UserLab sUserLab;
     private ArrayList<DatabaseObserver> mDatabaseObservers = new ArrayList<>();
+    private ArrayList<User> mLeaderBoardUsers;
 
     public static UserLab get() {
         if (sUserLab == null) {
@@ -87,6 +90,55 @@ public class UserLab {
         }
     }
 
+    public void createLeaderBoardList() {
+        mLeaderBoardUsers = new ArrayList<>();
+
+        for (String name : RandomNameList.nameList) {
+            mLeaderBoardUsers.add(createUser(name,
+                    "password",
+                    (int) (Math.random() * (10000))));
+        }
+        mLeaderBoardUsers.add(mCurrentUser);
+        mLeaderBoardUsers.add(createUser("Byron B",
+                "mayor",
+                18000 + (int) (Math.random() * (100000))));
+        mLeaderBoardUsers.add(createUser("Amy K",
+                "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Cletis E",
+                "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Gerard A",
+                    "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Jacquelyn M",
+                    "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Josep J",
+                    "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Justin B",
+                    "password",
+                10000 + (int) (Math.random() * (20000))));
+        mLeaderBoardUsers.add(createUser("Luis T",
+                    "password",
+                10000 + (int) (Math.random() * (20000))));
+
+        Collections.sort(mLeaderBoardUsers, new UserComparator());
+    }
+
+    private User createUser(String name, String password, int score) {
+        return new User.Builder()
+                .setUsername(name)
+                .setPassword(password)
+                .setScore(score)
+                .create();
+    }
+
+    public ArrayList<User> getLeaderBoardUserList() {
+        return mLeaderBoardUsers;
+    }
+
     public void registerDatabaseObserver(DatabaseObserver databaseObserver) {
         if (!mDatabaseObservers.contains(databaseObserver)) {
             mDatabaseObservers.add(databaseObserver);
@@ -105,5 +157,20 @@ public class UserLab {
 
     public interface DatabaseObserver {
         void notifyObserverUserCreatedFromDatabase(boolean shouldPushToDatabase);
+    }
+
+    private static class RandomNameList {
+
+        static final String[] nameList =  {"Mary", "Anna", "Emma", "Elizabeth", "Minnie", "Margaret",
+            "Ida", "Alice", "Bertha", "Sarah", "Angelina", "Corrie", "Maye", "Harry", "Fred", "David",
+            "Joe", "Charlie", "Richard", "Will", "Oscar", "Robert", "Frank", "Thomas", "Charles"};
+    }
+
+    private static class UserComparator implements Comparator<User> {
+
+        @Override
+        public int compare(User left, User right) {
+            return left.compareTo(right);
+        }
     }
 }
