@@ -2,11 +2,11 @@ package com.example.canscan;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.canscan.Barcode.BarcodeLab;
@@ -25,6 +25,7 @@ public class RewardsFragment extends Fragment implements View.OnClickListener {
     private Button mBikeShareRewardsButton;
     private Button mBillsRewardsButton;
     private Button mSabresRewardsButton;
+    private ImageButton mBackButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class RewardsFragment extends Fragment implements View.OnClickListener {
         mBikeShareRewardsButton = view.findViewById(R.id.bike_rewards_btn);
         mBillsRewardsButton = view.findViewById(R.id.bills_rewards_btn);
         mSabresRewardsButton = view.findViewById(R.id.sabres_rewards_btn);
+        mBackButton = view.findViewById(R.id.rewards_back_btn);
     }
 
     private void setOnClickListeners() {
@@ -52,6 +54,7 @@ public class RewardsFragment extends Fragment implements View.OnClickListener {
         mBikeShareRewardsButton.setOnClickListener(this);
         mBillsRewardsButton.setOnClickListener(this);
         mSabresRewardsButton.setOnClickListener(this);
+        mBackButton.setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +71,9 @@ public class RewardsFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.sabres_rewards_btn:
                 maybeClaimReward(GAME_TICKET_REWARDS_POINTS);
+                break;
+            case R.id.rewards_back_btn:
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStack();
                 break;
             default:
                 break;

@@ -13,7 +13,7 @@
     <string name="create_account_header">Create Account</string>
 
     <string name="you_have_earned_textView">You Have Earned</string>
-    <string name="points_textView">Points!</string>
+    <string name="points_textView">Spendable Points!</string>
     <string name="bottle_scanner">Bottle Scanner</string>
     <string name="leader_board">LeaderBoard</string>
     <string name="rewards">Rewards</string>
