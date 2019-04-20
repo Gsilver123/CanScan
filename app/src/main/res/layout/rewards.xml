@@ -6,6 +6,27 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
 
+    <ImageView
+        android:id="@+id/rewards_back_btn_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_back_btn_bg"
+        app:layout_constraintStart_toStartOf="@id/rewards_back_btn"
+        app:layout_constraintEnd_toEndOf="@id/rewards_back_btn"
+        app:layout_constraintTop_toTopOf="@id/rewards_back_btn"
+        app:layout_constraintBottom_toBottomOf="@id/rewards_back_btn"/>
+
+    <ImageButton
+        android:id="@+id/rewards_back_btn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/large_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/redeem_starting_r_textView"
         android:layout_width="wrap_content"

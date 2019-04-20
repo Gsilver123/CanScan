@@ -8,17 +8,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.canscan.User.User;
 import com.example.canscan.User.UserLab;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class LeaderBoardFragment extends Fragment {
+public class LeaderBoardFragment extends Fragment implements View.OnClickListener{
 
     private LeaderBoardAdapter mLeaderBoardAdapter;
     private RecyclerView mLeaderBoardRecyclerView;
+
+    private ImageButton mBackButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,8 @@ public class LeaderBoardFragment extends Fragment {
 
         mLeaderBoardRecyclerView = view.findViewById(R.id.leader_board_recyclerView);
         mLeaderBoardRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mBackButton = view.findViewById(R.id.leader_board_back_btn);
+        mBackButton.setOnClickListener(this);
 
         updateUI();
 
@@ -42,6 +48,17 @@ public class LeaderBoardFragment extends Fragment {
         if (mLeaderBoardAdapter == null) {
             mLeaderBoardAdapter = new LeaderBoardAdapter();
             mLeaderBoardRecyclerView.setAdapter(mLeaderBoardAdapter);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.leader_board_back_btn:
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStack();
+                break;
+            default:
+                break;
         }
     }
 

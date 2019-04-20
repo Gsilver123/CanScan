@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.canscan.Barcode.BarcodeLab;
 import com.example.canscan.User.UserLab;
+
+import java.util.Objects;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
@@ -31,6 +34,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Button mUpdateUsernameButton;
     private Button mUpdatePasswordButton;
     private Button mUpdateZipcodeButton;
+    private ImageButton mBackButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,12 +62,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         mUpdatePasswordButton = view.findViewById(R.id.profile_update_password_btn);
         mUpdateZipcodeButton = view.findViewById(R.id.profile_update_zipcode_btn);
         mRecyclePickUpDayTextView = view.findViewById(R.id.profile_recycle_pick_up_day_number_textView);
+        mBackButton = view.findViewById(R.id.profile_back_btn);
     }
 
     private void setOnClickListener() {
         mUpdateUsernameButton.setOnClickListener(this);
         mUpdatePasswordButton.setOnClickListener(this);
         mUpdateZipcodeButton.setOnClickListener(this);
+        mBackButton.setOnClickListener(this);
     }
 
     private void fillProfileTextViews() {
@@ -98,6 +104,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.profile_update_zipcode_btn:
                 showAlertDialogForProfileUpdate(ZIPCODE_UPDATE, "Update Zipcode");
+                break;
+            case R.id.profile_back_btn:
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStack();
                 break;
             default:
                 break;
