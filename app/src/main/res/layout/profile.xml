@@ -10,9 +10,10 @@
         android:id="@+id/profile_username_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="45sp"
+        android:textSize="40sp"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@id/profile_username_top_guideline"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/profile_horizontal_divider_line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -21,8 +22,9 @@
         android:layout_width="0dp"
         android:layout_height="6dp"
         android:background="@color/colorPrimary"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/profile_username_textView"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@id/profile_total_points_top_guideline"
         app:layout_constraintStart_toStartOf="@id/profile_username_textView"
         app:layout_constraintEnd_toEndOf="@id/profile_username_textView"/>
 
@@ -54,7 +56,7 @@
         android:text="@string/profile_metro_tickets"
         android:textSize="25sp"
         android:textColor="@color/white"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@id/profile_total_points_number_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -76,7 +78,7 @@
         android:text="@string/profile_bike_share_tickets"
         android:textSize="25sp"
         android:textColor="@color/white"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@id/profile_metro_tickets_number_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -98,7 +100,7 @@
         android:text="@string/profile_game_tickets"
         android:textSize="25sp"
         android:textColor="@color/white"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@id/profile_bike_share_tickets_number_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -120,7 +122,7 @@
         android:text="@string/profile_current_zipcode"
         android:textSize="25sp"
         android:textColor="@color/white"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@id/profile_game_tickets_number_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -132,6 +134,28 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
         app:layout_constraintTop_toBottomOf="@id/profile_current_zipcode_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_recycle_pick_up_day_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_pick_up_day"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/profile_current_zipcode_number_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_recycle_pick_up_day_number_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/profile_recycle_pick_up_day_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -172,18 +196,11 @@
         app:layout_constraintEnd_toEndOf="@id/profile_update_btn_end_guideline"/>
 
     <android.support.constraint.Guideline
-        android:id="@+id/profile_username_top_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".075"/>
-
-    <android.support.constraint.Guideline
         android:id="@+id/profile_total_points_top_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".2"/>
+        app:layout_constraintGuide_percent=".11"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/profile_update_btn_start_guideline"
@@ -204,20 +221,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".7"/>
+        app:layout_constraintGuide_percent=".73"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/profile_update_password_btn_top_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".785"/>
+        app:layout_constraintGuide_percent=".815"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/profile_update_zipcode_btn_top_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".87"/>
+        app:layout_constraintGuide_percent=".9"/>
 
 </android.support.constraint.ConstraintLayout>
