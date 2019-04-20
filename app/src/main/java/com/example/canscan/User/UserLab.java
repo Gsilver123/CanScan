@@ -105,7 +105,7 @@ public class UserLab {
     public void createLeaderBoardList() {
         mLeaderBoardUsers = new ArrayList<>();
 
-        int mayorScore = 35000 + (int) (Math.random() * (100000));
+        int mayorScore = 60001 + (int) (Math.random() * (100000));
         int amyScore = 10000 + (int) (Math.random() * (50000));
         int cletisScore = 10000 + (int) (Math.random() * (50000));
         int gerardScore = 10000 + (int) (Math.random() * (50000));

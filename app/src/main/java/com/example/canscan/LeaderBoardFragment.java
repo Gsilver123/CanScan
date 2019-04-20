@@ -92,24 +92,24 @@ public class LeaderBoardFragment extends Fragment implements View.OnClickListene
         void colorRanking(int position) throws NullPointerException {
             switch (position) {
                 case 1:
-                    mPositionTextView.setTextColor(getContext().getColor(R.color.gold));
-                    mUsernameTextView.setTextColor(getContext().getColor(R.color.gold));
-                    mPointsTextView.setTextColor(getContext().getColor(R.color.gold));
+                    mPositionTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.gold));
+                    mUsernameTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.gold));
+                    mPointsTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.gold));
                     break;
                 case 2:
-                    mPositionTextView.setTextColor(getContext().getColor(R.color.silver));
-                    mUsernameTextView.setTextColor(getContext().getColor(R.color.silver));
-                    mPointsTextView.setTextColor(getContext().getColor(R.color.silver));
+                    mPositionTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.silver));
+                    mUsernameTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.silver));
+                    mPointsTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.silver));
                     break;
                 case 3:
-                    mPositionTextView.setTextColor(getContext().getColor(R.color.bronze));
-                    mUsernameTextView.setTextColor(getContext().getColor(R.color.bronze));
-                    mPointsTextView.setTextColor(getContext().getColor(R.color.bronze));
+                    mPositionTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.bronze));
+                    mUsernameTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.bronze));
+                    mPointsTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.bronze));
                     break;
                 default:
-                    mPositionTextView.setTextColor(getContext().getColor(R.color.white));
-                    mUsernameTextView.setTextColor(getContext().getColor(R.color.white));
-                    mPointsTextView.setTextColor(getContext().getColor(R.color.white));
+                    mPositionTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.white));
+                    mUsernameTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.white));
+                    mPointsTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.white));
                     break;
             }
         }
