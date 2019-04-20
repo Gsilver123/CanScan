@@ -103,8 +103,9 @@ public class HomeActivity extends AppCompatActivity implements DatabaseObserver 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Invalid Buffalo Zipcode")
                 .setMessage("Your zipcode is not a valid city of Buffalo zipcode." +
-                        " If you would like to receive push notifications for recycle pick up days" +
-                        " please change this by navigating to the User Profile page")
+                        " If you would like to know your curbside recycle date" +
+                        " please change this by navigating to the User Profile page. Otherwise," +
+                        " happy recycling!")
                 .setNeutralButton("Ok", (dialogInterface, which) -> {
                           dialogInterface.dismiss();
                 })

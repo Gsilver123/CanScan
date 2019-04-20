@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/profile_update_zipcode"
         android:inputType="number"
+        android:maxLength="5"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/update_profile_start_guideline"

@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="@string/password_login"
+        android:maxLength="12"
         style="@style/LoginCred"
         app:layout_constraintStart_toStartOf="@id/new_user_start_vertical_guideline"
         app:layout_constraintEnd_toEndOf="@id/new_user_end_vertical_guideline"
