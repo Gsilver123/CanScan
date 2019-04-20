@@ -25,6 +25,7 @@ import static com.example.canscan.DataBaseUtils.TICKETS;
 import static com.example.canscan.DataBaseUtils.TOTAL_POINTS;
 import static com.example.canscan.DataBaseUtils.USER_ID;
 import static com.example.canscan.DataBaseUtils.USER_NAME;
+import static com.example.canscan.DataBaseUtils.ZIPCODE;
 import static com.example.canscan.DataBaseUtils.getMongoCollection;
 import static com.example.canscan.DataBaseUtils.getStitchClient;
 
@@ -72,6 +73,7 @@ public class BarcodeLab {
             updateDoc.append(METRO, UserLab.get().getCurrentUser().getMetroTickets());
             updateDoc.append(BIKE, UserLab.get().getCurrentUser().getBikeTickets());
             updateDoc.append(TICKETS, UserLab.get().getCurrentUser().getGameTickets());
+            updateDoc.append(ZIPCODE, UserLab.get().getCurrentUser().getZipcode());
             updateDoc.append(BARCODES, mBarcodes);
 
             return getMongoCollection().updateOne(

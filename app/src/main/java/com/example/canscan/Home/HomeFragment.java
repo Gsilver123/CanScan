@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.canscan.Barcode.BarcodeCameraActivity;
 import com.example.canscan.LeaderBoardFragment;
+import com.example.canscan.ProfileFragment;
 import com.example.canscan.R;
 import com.example.canscan.RewardsFragment;
 import com.example.canscan.User.UserLab;
@@ -42,6 +43,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
 
         UserLab.get().registerDatabaseObserver(this);
 
+        try {
+            mPointsEarned.setText(String.valueOf(UserLab.get().getCurrentUser().getScore()));
+        }
+        catch (NullPointerException exception) {
+            exception.printStackTrace();
+        }
+
         return view;
     }
 
@@ -56,7 +64,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
         mScanCodeButton = view.findViewById(R.id.scan_code_btn);
         mLeaderBoardButton = view.findViewById(R.id.leader_board_btn);
         mRewardsButton = view.findViewById(R.id.rewards_btn);
-        mSettingsButton = view.findViewById(R.id.settings_btn);
+        mSettingsButton = view.findViewById(R.id.profile_btn);
     }
 
     private void setOnClickListeners() {
@@ -83,8 +91,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
             case R.id.rewards_btn:
                 startFragment(new RewardsFragment());
                 break;
-            case R.id.settings_btn:
-                Toast.makeText(getContext(), "Settings", Toast.LENGTH_SHORT).show();
+            case R.id.profile_btn:
+                startFragment(new ProfileFragment());
                 break;
             default:
                 Toast.makeText(getContext(), "Action not supported", Toast.LENGTH_SHORT).show();
@@ -99,7 +107,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
 
     private void startFragment(Fragment fragment) {
         FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.main_fragment_container, fragment);
+        transaction.replace(R.id.main_fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }

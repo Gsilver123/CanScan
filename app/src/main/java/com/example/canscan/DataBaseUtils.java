@@ -24,6 +24,7 @@ public class DataBaseUtils {
     public static final String METRO = "metro";
     public static final String BIKE = "bike";
     public static final String TICKETS = "tickets";
+    public static final String ZIPCODE = "zipcode";
     public static final String BARCODES = "barcodes";
 
     private static StitchAppClient mClient;

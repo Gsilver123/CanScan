@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditText
+        android:id="@+id/update_profile_editText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/profile_update_zipcode"
+        android:inputType="number"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/update_profile_start_guideline"
+        app:layout_constraintEnd_toEndOf="@id/update_profile_end_guideline"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/update_profile_start_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".2"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/update_profile_end_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".8"/>
+
+</android.support.constraint.ConstraintLayout>

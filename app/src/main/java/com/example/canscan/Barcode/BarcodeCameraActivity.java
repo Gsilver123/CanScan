@@ -235,6 +235,6 @@ public class BarcodeCameraActivity extends AppCompatActivity implements View.OnC
         UserLab.get().getCurrentUser().setScore(scoreToAdd);
         UserLab.get().getCurrentUser().setTotalScore(scoreToAdd);
         BarcodeLab.get().updateDatabaseWithCurrentListAndPoints();
-        UserLab.get().notifyObserversUserUpdated(false);
+        UserLab.get().notifyDatabaseObserversUserUpdated(false);
     }
 }

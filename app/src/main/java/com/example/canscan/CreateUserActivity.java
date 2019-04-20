@@ -30,6 +30,7 @@ import static com.example.canscan.DataBaseUtils.TICKETS;
 import static com.example.canscan.DataBaseUtils.TOTAL_POINTS;
 import static com.example.canscan.DataBaseUtils.USER_ID;
 import static com.example.canscan.DataBaseUtils.USER_NAME;
+import static com.example.canscan.DataBaseUtils.ZIPCODE;
 import static com.example.canscan.DataBaseUtils.getMongoCollection;
 import static com.example.canscan.DataBaseUtils.getStitchClient;
 
@@ -104,6 +105,7 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
             updateDoc.append(METRO, 0);
             updateDoc.append(BIKE, 0);
             updateDoc.append(TICKETS, 0);
+            updateDoc.append(ZIPCODE, 0);
             updateDoc.append(BARCODES, Arrays.asList());
 
             return getMongoCollection().updateOne(

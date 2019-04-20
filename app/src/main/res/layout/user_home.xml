@@ -85,12 +85,12 @@
         app:layout_constraintTop_toTopOf="@id/rewards_btn_guideline" />
 
     <Button
-        android:id="@+id/settings_btn"
+        android:id="@+id/profile_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/login_btn"
-        android:drawableStart="@drawable/settings_icon"
-        android:text="@string/settings"
+        android:drawableStart="@drawable/profile_icon"
+        android:text="@string/profile"
         android:textSize="20sp"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@id/button_start_vertical_guideline"
