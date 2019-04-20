@@ -78,7 +78,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         mMetroTicketsTextView.setText(String.valueOf(UserLab.get().getCurrentUser().getMetroTickets()));
         mBikeShareTicketsTextView.setText(String.valueOf(UserLab.get().getCurrentUser().getBikeTickets()));
         mGameTicketsTextView.setText(String.valueOf(UserLab.get().getCurrentUser().getGameTickets()));
-        mCurrentZipcodeTextView.setText(String.valueOf(UserLab.get().getCurrentUser().getZipcode()));
+
+        if (UserLab.get().getCurrentUser().getZipcode() == 0) {
+            mCurrentZipcodeTextView.setText("N/A");
+        }
+        else {
+            mCurrentZipcodeTextView.setText(String.valueOf(UserLab.get().getCurrentUser().getZipcode()));
+        }
 
         fillRecycleDay();
     }

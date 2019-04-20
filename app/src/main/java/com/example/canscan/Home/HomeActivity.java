@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity implements DatabaseObserver 
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(view)
-                .setTitle("Update Zipcode")
+                .setTitle("Confirm Your Zipcode")
                 .setNegativeButton("Later", (dialogInterface, which) -> dialogInterface.dismiss())
                 .setPositiveButton("Update", (dialogInterface, which) -> { })
                 .create();
