@@ -230,11 +230,11 @@ public class BarcodeCameraActivity extends AppCompatActivity implements View.OnC
     }
 
     private void addPointsFromBarcode(int addedPoints) {
-        int scoreToAdd = UserLab.get().getCurrentUser().getScore() + addedPoints;
-
-        UserLab.get().getCurrentUser().setScore(scoreToAdd);
-        UserLab.get().getCurrentUser().setTotalScore(scoreToAdd);
+        UserLab.get().getCurrentUser()
+                .setScore(UserLab.get().getCurrentUser().getScore() + addedPoints);
+        UserLab.get().getCurrentUser()
+                .setTotalScore(UserLab.get().getCurrentUser().getTotalScore() + addedPoints);
         BarcodeLab.get().updateDatabaseWithCurrentListAndPoints();
-        UserLab.get().notifyObserversUserUpdated(false);
+        UserLab.get().notifyDatabaseObserversUserUpdated(false);
     }
 }

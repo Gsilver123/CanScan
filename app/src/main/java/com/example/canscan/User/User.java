@@ -9,9 +9,10 @@ public class User {
     private int mMetroTickets;
     private int mBikeTickets;
     private int mGameTickets;
+    private int mZipcode;
 
     private User(String username, String password, int totalScore, int score,
-                 int metroTickets, int bikeTickets, int gameTickets) {
+                 int metroTickets, int bikeTickets, int gameTickets, int zipcode) {
 
         mUsername = username;
         mPassword = password;
@@ -20,14 +21,23 @@ public class User {
         mMetroTickets = metroTickets;
         mBikeTickets = bikeTickets;
         mGameTickets = gameTickets;
+        mZipcode = zipcode;
     }
 
     public String getUsername() {
         return mUsername;
     }
 
+    public void setUsername(String username) {
+        mUsername = username;
+    }
+
     public String getPassword() {
         return mPassword;
+    }
+
+    public void setPassword(String password) {
+        mPassword = password;
     }
 
     public int getTotalScore() {
@@ -70,6 +80,14 @@ public class User {
         mGameTickets = gameTickets;
     }
 
+    public int getZipcode() {
+        return mZipcode;
+    }
+
+    public void setZipcode(int zipcode) {
+        mZipcode = zipcode;
+    }
+
     public int compareTo(User user) {
         if (mScore > user.getTotalScore()) {
             return -1;
@@ -89,6 +107,7 @@ public class User {
         private int mBuilderMetroTickets;
         private int mBuilderBikeTickets;
         private int mBuilderGameTickets;
+        private int mBuilderZipcode;
 
         User.Builder setUsername(String username) {
             mBuilderUsername = username;
@@ -125,11 +144,20 @@ public class User {
             return this;
         }
 
+        User.Builder setZipcode(int zipcode) {
+            mBuilderZipcode = zipcode;
+            return this;
+        }
+
         User create() throws IllegalStateException {
             if (mBuilderUsername == null
                     || mBuilderPassword == null
                     || mBuilderScore < 0
-                    || mBuilderTotalScore < 0) {
+                    || mBuilderTotalScore < 0
+                    || mBuilderMetroTickets < 0
+                    || mBuilderBikeTickets < 0
+                    || mBuilderGameTickets < 0
+                    || mBuilderZipcode < 0) {
 
                 throw new IllegalStateException("Credentials not met");
             }
@@ -140,7 +168,8 @@ public class User {
                     mBuilderScore,
                     mBuilderMetroTickets,
                     mBuilderBikeTickets,
-                    mBuilderGameTickets);
+                    mBuilderGameTickets,
+                    mBuilderZipcode);
         }
     }
  }

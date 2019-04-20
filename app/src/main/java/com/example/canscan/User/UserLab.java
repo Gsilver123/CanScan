@@ -23,6 +23,7 @@ import static com.example.canscan.DataBaseUtils.TICKETS;
 import static com.example.canscan.DataBaseUtils.TOTAL_POINTS;
 import static com.example.canscan.DataBaseUtils.USER_ID;
 import static com.example.canscan.DataBaseUtils.USER_NAME;
+import static com.example.canscan.DataBaseUtils.ZIPCODE;
 import static com.example.canscan.DataBaseUtils.getMongoCollection;
 import static com.example.canscan.DataBaseUtils.getStitchClient;
 
@@ -91,9 +92,10 @@ public class UserLab {
                     .setMetroTickets(Integer.parseInt(jsonObject.get(METRO).toString()))
                     .setBikeTickets(Integer.parseInt(jsonObject.get(BIKE).toString()))
                     .setGameTickets(Integer.parseInt(jsonObject.get(TICKETS).toString()))
+                    .setZipcode(Integer.parseInt(jsonObject.get(ZIPCODE).toString()))
                     .create();
 
-            notifyObserversUserUpdated(true);
+            notifyDatabaseObserversUserUpdated(true);
         }
         else {
             Log.d(STITCH, "Document is empty");
@@ -140,6 +142,7 @@ public class UserLab {
                 .setMetroTickets(0)
                 .setBikeTickets(0)
                 .setGameTickets(0)
+                .setZipcode(0)
                 .create();
     }
 
@@ -157,7 +160,7 @@ public class UserLab {
         mDatabaseObservers.remove(databaseObserver);
     }
 
-    public void notifyObserversUserUpdated(boolean shouldPullFromDatabase) {
+    public void notifyDatabaseObserversUserUpdated(boolean shouldPullFromDatabase) {
         for (DatabaseObserver databaseObserver : mDatabaseObservers) {
             databaseObserver.notifyObserverUserCreatedFromDatabase(shouldPullFromDatabase);
         }

@@ -133,7 +133,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private void compareUserInputToDatabase(List<Document> documents) throws JSONException, IndexOutOfBoundsException {
+    private void compareUserInputToDatabase(List<Document> documents)
+            throws JSONException, IndexOutOfBoundsException {
+
         try {
             documents.get(0);
         }

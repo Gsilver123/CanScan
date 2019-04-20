@@ -17,7 +17,7 @@
     <string name="bottle_scanner">Bottle Scanner</string>
     <string name="leader_board">LeaderBoard</string>
     <string name="rewards">Rewards</string>
-    <string name="settings">Settings</string>
+    <string name="profile">User Profile</string>
     <string name="welcome">Welcome</string>
 
     <string name="top_r">edeem</string>
@@ -28,4 +28,15 @@
     <string name="bike_btn_text">2,500 Points</string>
     <string name="bills_btn_text">15,000 Points</string>
     <string name="sabres_btn_text">15,000 Points</string>
+
+    <string name="profile_total_point">Total Points:</string>
+    <string name="profile_metro_tickets">Metro Tickets:</string>
+    <string name="profile_bike_share_tickets">Bike Share Tickets:</string>
+    <string name="profile_game_tickets">Sabres/Bills Tickets:</string>
+    <string name="profile_current_zipcode">Zipcode:</string>
+    <string name="profile_update_zipcode">Update Zipcode</string>
+    <string name="profile_update_username">Update Username</string>
+    <string name="profile_update_password">Update Password</string>
+
+    <string name="update_profile">Update Profile</string>
 </resources>
