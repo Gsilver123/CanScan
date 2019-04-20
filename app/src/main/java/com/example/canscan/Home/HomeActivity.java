@@ -1,9 +1,16 @@
 package com.example.canscan.Home;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.canscan.Barcode.BarcodeLab;
 import com.example.canscan.DataBaseUtils;
@@ -14,6 +21,7 @@ import static com.example.canscan.DataBaseUtils.STITCH;
 import static com.example.canscan.DataBaseUtils.getMongoCollection;
 import static com.example.canscan.DataBaseUtils.getStitchClient;
 import com.example.canscan.User.UserLab.DatabaseObserver;
+import com.example.canscan.ZipcodeLab;
 
 public class HomeActivity extends AppCompatActivity implements DatabaseObserver {
 
@@ -48,6 +56,60 @@ public class HomeActivity extends AppCompatActivity implements DatabaseObserver 
     public void notifyObserverUserCreatedFromDatabase(boolean shouldPullFromDatabase) {
         if (shouldPullFromDatabase) {
             BarcodeLab.get().pullBarcodeListFromDatabase();
+            if (String.valueOf(UserLab.get().getCurrentUser().getZipcode()).length() != 5) {
+                setZipcodeAlertDialog();
+            }
         }
+    }
+
+    private void setZipcodeAlertDialog() {
+        View view = LayoutInflater.from(this)
+                .inflate(R.layout.profile_update_zipcode_alert_dialog, null, false);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(view)
+                .setTitle("Update Zipcode")
+                .setNegativeButton("Later", (dialogInterface, which) -> dialogInterface.dismiss())
+                .setPositiveButton("Update", (dialogInterface, which) -> { })
+                .create();
+
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            String newZipcode = ((EditText)
+                    view.findViewById(R.id.update_profile_editText)).getText().toString();
+
+            if (newZipcode.length() == 5) {
+                UserLab.get().getCurrentUser().setZipcode(Integer.parseInt(newZipcode));
+                BarcodeLab.get().updateDatabaseWithCurrentListAndPoints();
+                dialog.dismiss();
+
+                if (!ZipcodeLab.get().getZipcodePickUpDaysMap().containsKey(Integer.parseInt(newZipcode))) {
+                    promptIfZipcodeIsNotInArea();
+                }
+            }
+            else {
+                Toast.makeText(this,
+                        "Has to be in standard zipcode format (5 numbers)",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        }
+    }
+
+    private void promptIfZipcodeIsNotInArea() {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Invalid Buffalo Zipcode")
+                .setMessage("Your zipcode is not a valid city of Buffalo zipcode." +
+                        " If you would like to receive push notifications for recycle pick up days" +
+                        " please change this by navigating to the User Profile page")
+                .setNeutralButton("Ok", (dialogInterface, which) -> {
+                          dialogInterface.dismiss();
+                })
+                .create();
+
+        dialog.show();
     }
 }

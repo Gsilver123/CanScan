@@ -27,6 +27,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private TextView mBikeShareTicketsTextView;
     private TextView mGameTicketsTextView;
     private TextView mCurrentZipcodeTextView;
+    private TextView mRecyclePickUpDayTextView;
     private Button mUpdateUsernameButton;
     private Button mUpdatePasswordButton;
     private Button mUpdateZipcodeButton;
@@ -56,6 +57,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         mUpdateUsernameButton = view.findViewById(R.id.profile_update_username_btn);
         mUpdatePasswordButton = view.findViewById(R.id.profile_update_password_btn);
         mUpdateZipcodeButton = view.findViewById(R.id.profile_update_zipcode_btn);
+        mRecyclePickUpDayTextView = view.findViewById(R.id.profile_recycle_pick_up_day_number_textView);
     }
 
     private void setOnClickListener() {
@@ -71,6 +73,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         mBikeShareTicketsTextView.setText(String.valueOf(UserLab.get().getCurrentUser().getBikeTickets()));
         mGameTicketsTextView.setText(String.valueOf(UserLab.get().getCurrentUser().getGameTickets()));
         mCurrentZipcodeTextView.setText(String.valueOf(UserLab.get().getCurrentUser().getZipcode()));
+
+        fillRecycleDay();
+    }
+
+    private void fillRecycleDay() {
+        if (ZipcodeLab.get().getZipcodePickUpDaysMap().containsKey(UserLab.get().getCurrentUser().getZipcode())) {
+            mRecyclePickUpDayTextView.setText(ZipcodeLab.get()
+                    .getZipcodePickUpDaysMap().get(UserLab.get().getCurrentUser().getZipcode()));
+        }
+        else {
+            mRecyclePickUpDayTextView.setText("N/A");
+        }
     }
 
     @Override
@@ -145,6 +159,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         UserLab.get().getCurrentUser().setZipcode(Integer.parseInt(newZipcode));
                         BarcodeLab.get().updateDatabaseWithCurrentListAndPoints();
                         mCurrentZipcodeTextView.setText(String.valueOf(newZipcode));
+
+                        if (!ZipcodeLab.get().getZipcodePickUpDaysMap().containsKey(Integer.parseInt(newZipcode))) {
+                            promptIfZipcodeIsNotInArea();
+                        }
+                        fillRecycleDay();
                         dialog.dismiss();
                     }
                     else {
@@ -206,5 +225,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if (dialog.getWindow() != null) {
             dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         }
+    }
+
+    private void promptIfZipcodeIsNotInArea() {
+        AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setTitle("Invalid Buffalo Zipcode")
+                .setMessage("Your zipcode is not a valid city of Buffalo zipcode." +
+                        " If you would like to receive push notifications " +
+                        "for recycle pick up days please change")
+                .setNeutralButton("Ok", (dialogInterface, which) -> {
+                    dialogInterface.dismiss();
+                })
+                .create();
+
+        dialog.show();
     }
 }

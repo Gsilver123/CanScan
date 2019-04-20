@@ -37,6 +37,7 @@
     <string name="profile_update_zipcode">Update Zipcode</string>
     <string name="profile_update_username">Update Username</string>
     <string name="profile_update_password">Update Password</string>
+    <string name="profile_pick_up_day">Your Recycle Pick Up Day:</string>
 
     <string name="update_profile">Update Profile</string>
 </resources>
