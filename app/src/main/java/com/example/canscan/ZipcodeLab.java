@@ -4,15 +4,15 @@ import java.util.HashMap;
 
 public class ZipcodeLab {
 
-    private static ZipcodeLab sZupcodeLab;
+    private static ZipcodeLab sZipcodeLab;
 
     private HashMap<Integer, String> mZipcodePickUpDays;
 
     public static ZipcodeLab get() {
-        if (sZupcodeLab == null) {
-            sZupcodeLab = new ZipcodeLab();
+        if (sZipcodeLab == null) {
+            sZipcodeLab = new ZipcodeLab();
         }
-        return sZupcodeLab;
+        return sZipcodeLab;
     }
 
     private ZipcodeLab() {

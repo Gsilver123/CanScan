@@ -130,18 +130,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     String newUsername = ((EditText)
                             v.findViewById(R.id.update_profile_editText)).getText().toString();
 
-                    if (!newUsername.contains(" ")) {
-                        UserLab.get().getCurrentUser().setUsername(((EditText)
-                                v.findViewById(R.id.update_profile_editText)).getText().toString());
-                        BarcodeLab.get().updateDatabaseWithCurrentListAndPoints();
-                        mUsernameTextView.setText(newUsername);
-                        dialog.dismiss();
-                    }
-                    else {
-                        Toast.makeText(getActivity(),
-                                "Cannot contain spaces",
-                                Toast.LENGTH_SHORT).show();
-                    }
+                    UserLab.get().getCurrentUser().setUsername(((EditText)
+                            v.findViewById(R.id.update_profile_editText)).getText().toString());
+                    BarcodeLab.get().updateDatabaseWithCurrentListAndPoints();
+                    mUsernameTextView.setText(newUsername);
+                    dialog.dismiss();
+
                     break;
                 case PASSWORD_UPDATE:
                     if (newPasswordIsValid(((EditText)
@@ -150,6 +144,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                                 v.findViewById(R.id.update_profile_editText)).getText().toString());
                         dialog.dismiss();
                     }
+
                     break;
                 case ZIPCODE_UPDATE:
                     String newZipcode = ((EditText)
@@ -171,6 +166,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                                 "Has to be in standard zipcode format (5 numbers)",
                                 Toast.LENGTH_SHORT).show();
                     }
+
                     break;
                 default:
                     break;
@@ -231,8 +227,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle("Invalid Buffalo Zipcode")
                 .setMessage("Your zipcode is not a valid city of Buffalo zipcode." +
-                        " If you would like to receive push notifications " +
-                        "for recycle pick up days please change")
+                        " If you would like to know your curbside recycle date " +
+                        "please update. Otherwise, happy recycling!")
                 .setNeutralButton("Ok", (dialogInterface, which) -> {
                     dialogInterface.dismiss();
                 })
