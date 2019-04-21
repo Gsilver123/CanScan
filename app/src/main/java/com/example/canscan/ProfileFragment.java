@@ -61,7 +61,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         mUpdateUsernameButton = view.findViewById(R.id.profile_update_username_btn);
         mUpdatePasswordButton = view.findViewById(R.id.profile_update_password_btn);
         mUpdateZipcodeButton = view.findViewById(R.id.profile_update_zipcode_btn);
-        mRecyclePickUpDayTextView = view.findViewById(R.id.profile_recycle_pick_up_day_number_textView);
+        mRecyclePickUpDayTextView = view.findViewById(R.id.profile_recycle_pick_up_day_string_textView);
         mBackButton = view.findViewById(R.id.profile_back_btn);
     }
 

@@ -21,7 +21,7 @@
         android:id="@+id/leader_board_position_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="@dimen/_21ssp"
         app:layout_constraintStart_toStartOf="@id/position_start_vertical_guideline"
         app:layout_constraintTop_toBottomOf="@id/green_divider_line_top"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -30,7 +30,7 @@
         android:id="@+id/leader_board_username_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="@dimen/_21ssp"
         android:maxLength="12"
         app:layout_constraintStart_toStartOf="@id/username_start_vertical_guideline"
         app:layout_constraintTop_toBottomOf="@id/green_divider_line_top"
@@ -40,7 +40,7 @@
         android:id="@+id/leader_board_points_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="@dimen/_21ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/green_divider_line_top"
         app:layout_constraintBottom_toBottomOf="parent"/>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/redeem_starting_r_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/capital_r"
+        android:textSize="@dimen/_35ssp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/redeem_textView"
+        app:layout_constraintTop_toTopOf="@id/redeem_textView"
+        app:layout_constraintBottom_toBottomOf="@id/redeem_textView"/>
+
+    <TextView
+        android:id="@+id/redeem_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/top_r"
+        android:textSize="@dimen/_18ssp"
+        android:textColor="@color/white"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/redeem_starting_r_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recycle_textView"/>
+
+    <TextView
+        android:id="@+id/recycle_starting_r_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/capital_r"
+        android:textSize="@dimen/_43ssp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintEnd_toStartOf="@id/recycle_textView"
+        app:layout_constraintStart_toStartOf="@id/redeem_starting_r_textView"
+        app:layout_constraintTop_toTopOf="@id/recycle_textView"
+        app:layout_constraintBottom_toBottomOf="@id/recycle_textView"/>
+
+    <TextView
+        android:id="@+id/recycle_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/center_r"
+        android:textSize="@dimen/_21ssp"
+        android:textColor="@color/white"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@id/recycle_starting_r_textView"
+        app:layout_constraintTop_toBottomOf="@id/redeem_textView"
+        app:layout_constraintBottom_toTopOf="@id/rewards_textView"
+        app:layout_constraintEnd_toEndOf="@id/redeem_textView"/>
+
+    <TextView
+        android:id="@+id/rewards_starting_r_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/capital_r"
+        android:textSize="@dimen/_50ssp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/redeem_starting_r_textView"
+        app:layout_constraintEnd_toStartOf="@id/rewards_textView"
+        app:layout_constraintTop_toTopOf="@id/rewards_textView"
+        app:layout_constraintBottom_toBottomOf="@id/rewards_textView"/>
+
+    <TextView
+        android:id="@+id/rewards_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lower_r"
+        android:textSize="@dimen/_32ssp"
+        android:textColor="@color/white"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@id/rewards_starting_r_textView"
+        app:layout_constraintEnd_toEndOf="@id/redeem_textView"
+        app:layout_constraintTop_toBottomOf="@id/recycle_textView" />
+
+    <View
+        android:id="@+id/rewards_horizontal_divider_line"
+        android:layout_width="0dp"
+        android:layout_height="6dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rewards_textView"/>
+
+</android.support.constraint.ConstraintLayout>
