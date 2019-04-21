@@ -48,7 +48,7 @@
     <Button
         android:id="@+id/scan_code_btn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_35sdp"
         android:background="@drawable/login_btn"
         android:drawableStart="@drawable/camera_icon"
         android:text="@string/bottle_scanner"
@@ -61,7 +61,7 @@
     <Button
         android:id="@+id/leader_board_btn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_35sdp"
         android:background="@drawable/login_btn"
         android:drawableStart="@drawable/trophy_icon"
         android:text="@string/leader_board"
@@ -74,7 +74,7 @@
     <Button
         android:id="@+id/rewards_btn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_35sdp"
         android:background="@drawable/login_btn"
         android:drawableStart="@drawable/leaf_icon"
         android:text="@string/rewards"
@@ -87,7 +87,7 @@
     <Button
         android:id="@+id/profile_btn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_35sdp"
         android:background="@drawable/login_btn"
         android:drawableStart="@drawable/profile_icon"
         android:text="@string/profile"
@@ -113,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/open_buffalo_href_textView_2"
         android:textColor="@color/grey"
         android:textSize="@dimen/_15ssp"
