@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/profile_total_points_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_total_point"
+        android:textSize="@dimen/_16ssp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/profile_total_points_number_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_total_points_number_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/profile_total_points_textView"
+        app:layout_constraintBottom_toTopOf="@id/profile_metro_tickets_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/profile_metro_tickets_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_metro_tickets"
+        android:textSize="@dimen/_16ssp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/profile_total_points_number_textView"
+        app:layout_constraintBottom_toTopOf="@id/profile_metro_tickets_number_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_metro_tickets_number_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/profile_metro_tickets_textView"
+        app:layout_constraintBottom_toTopOf="@id/profile_bike_share_tickets_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_bike_share_tickets_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_bike_share_tickets"
+        android:textSize="@dimen/_16ssp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/profile_metro_tickets_number_textView"
+        app:layout_constraintBottom_toTopOf="@id/profile_bike_share_tickets_number_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_bike_share_tickets_number_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/profile_bike_share_tickets_textView"
+        app:layout_constraintBottom_toTopOf="@id/profile_game_tickets_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_game_tickets_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_game_tickets"
+        android:textSize="@dimen/_16ssp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/profile_bike_share_tickets_number_textView"
+        app:layout_constraintBottom_toTopOf="@id/profile_game_tickets_number_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_game_tickets_number_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/profile_game_tickets_textView"
+        app:layout_constraintBottom_toTopOf="@id/profile_current_zipcode_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_current_zipcode_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_current_zipcode"
+        android:textSize="@dimen/_16ssp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/profile_game_tickets_number_textView"
+        app:layout_constraintBottom_toTopOf="@id/profile_current_zipcode_number_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_current_zipcode_number_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/profile_current_zipcode_textView"
+        app:layout_constraintBottom_toTopOf="@id/profile_recycle_pick_up_day_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_recycle_pick_up_day_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_pick_up_day"
+        android:textSize="@dimen/_16ssp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/profile_current_zipcode_number_textView"
+        app:layout_constraintBottom_toTopOf="@id/profile_recycle_pick_up_day_string_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_recycle_pick_up_day_string_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/profile_recycle_pick_up_day_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

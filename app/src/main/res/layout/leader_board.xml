@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/leader_board_back_btn_bg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:background="@drawable/home_back_btn_bg"
         app:layout_constraintStart_toStartOf="@id/leader_board_back_btn"
         app:layout_constraintEnd_toEndOf="@id/leader_board_back_btn"
@@ -29,20 +29,20 @@
 
     <ImageView
         android:id="@+id/trophy_imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
         android:background="@drawable/leaderboard_trophy"
-        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/leaderboard_textView"/>
 
     <TextView
         android:id="@+id/leaderboard_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/leader_board"
-        android:textSize="40sp"
+        android:textSize="@dimen/_33ssp"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

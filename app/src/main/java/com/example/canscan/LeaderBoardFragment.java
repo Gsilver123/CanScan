@@ -1,8 +1,10 @@
 package com.example.canscan;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -92,24 +94,36 @@ public class LeaderBoardFragment extends Fragment implements View.OnClickListene
         void colorRanking(int position) throws NullPointerException {
             switch (position) {
                 case 1:
-                    mPositionTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.gold));
-                    mUsernameTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.gold));
-                    mPointsTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.gold));
+                    mPositionTextView.setTextColor(ContextCompat.
+                            getColor(Objects.requireNonNull(getActivity()), R.color.gold));
+                    mUsernameTextView.setTextColor(ContextCompat
+                            .getColor(Objects.requireNonNull(getActivity()), R.color.gold));
+                    mPointsTextView.setTextColor(ContextCompat
+                            .getColor(Objects.requireNonNull(getActivity()), R.color.gold));
                     break;
                 case 2:
-                    mPositionTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.silver));
-                    mUsernameTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.silver));
-                    mPointsTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.silver));
+                    mPositionTextView.setTextColor(ContextCompat
+                            .getColor(Objects.requireNonNull(getActivity()), R.color.silver));
+                    mUsernameTextView.setTextColor(ContextCompat
+                            .getColor(Objects.requireNonNull(getActivity()), R.color.silver));
+                    mPointsTextView.setTextColor(ContextCompat
+                            .getColor(Objects.requireNonNull(getActivity()), R.color.silver));
                     break;
                 case 3:
-                    mPositionTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.bronze));
-                    mUsernameTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.bronze));
-                    mPointsTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.bronze));
+                    mPositionTextView.setTextColor(ContextCompat
+                            .getColor(Objects.requireNonNull(getActivity()), R.color.bronze));
+                    mUsernameTextView.setTextColor(ContextCompat
+                            .getColor(Objects.requireNonNull(getActivity()), R.color.bronze));
+                    mPointsTextView.setTextColor(ContextCompat
+                            .getColor(Objects.requireNonNull(getActivity()), R.color.bronze));
                     break;
                 default:
-                    mPositionTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.white));
-                    mUsernameTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.white));
-                    mPointsTextView.setTextColor(Objects.requireNonNull(getContext()).getResources().getColor(R.color.white));
+                    mPositionTextView.setTextColor(ContextCompat
+                            .getColor(Objects.requireNonNull(getActivity()), R.color.white));
+                    mUsernameTextView.setTextColor(ContextCompat
+                            .getColor(Objects.requireNonNull(getActivity()), R.color.white));
+                    mPointsTextView.setTextColor(ContextCompat
+                            .getColor(Objects.requireNonNull(getActivity()), R.color.white));
                     break;
             }
         }

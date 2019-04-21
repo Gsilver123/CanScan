@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/rewards_back_btn_bg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:background="@drawable/home_back_btn_bg"
         app:layout_constraintStart_toStartOf="@id/rewards_back_btn"
         app:layout_constraintEnd_toEndOf="@id/rewards_back_btn"
@@ -27,82 +27,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/redeem_starting_r_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/capital_r"
-        android:textSize="45sp"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="@id/redeem_start_vertical_guideline"
-        app:layout_constraintEnd_toStartOf="@id/redeem_textView"
-        app:layout_constraintTop_toBottomOf="@id/redeem_top_horizontal_guideline"/>
 
-    <TextView
-        android:id="@+id/redeem_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/top_r"
-        android:textSize="25sp"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@id/redeem_starting_r_textView"
-        app:layout_constraintTop_toTopOf="@id/redeem_starting_r_textView"
-        app:layout_constraintBottom_toBottomOf="@id/redeem_starting_r_textView" />
-
-    <TextView
-        android:id="@+id/recycle_starting_r_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/capital_r"
-        android:textSize="55sp"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toStartOf="@id/recycle_textView"
-        app:layout_constraintStart_toStartOf="@id/redeem_starting_r_textView"
-        app:layout_constraintTop_toBottomOf="@id/redeem_textView"/>
-
-    <TextView
-        android:id="@+id/recycle_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/center_r"
-        android:textSize="30sp"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@id/recycle_starting_r_textView"
-        app:layout_constraintTop_toTopOf="@id/recycle_starting_r_textView"
-        app:layout_constraintBottom_toBottomOf="@id/recycle_starting_r_textView"
-        app:layout_constraintEnd_toEndOf="@id/redeem_textView"/>
-
-    <TextView
-        android:id="@+id/rewards_starting_r_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/capital_r"
-        android:textSize="65sp"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="@id/recycle_starting_r_textView"
-        app:layout_constraintEnd_toStartOf="@id/rewards_textView"
-        app:layout_constraintTop_toBottomOf="@id/recycle_textView"/>
-
-    <TextView
-        android:id="@+id/rewards_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lower_r"
-        android:textSize="45sp"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@id/rewards_starting_r_textView"
-        app:layout_constraintEnd_toEndOf="@id/recycle_textView"
-        app:layout_constraintTop_toTopOf="@id/rewards_starting_r_textView"
-        app:layout_constraintBottom_toBottomOf="@id/rewards_starting_r_textView"/>
-
-    <View
-        android:id="@+id/rewards_horizontal_divider_line"
+    <include
+        layout="@layout/rewards_top_layout"
         android:layout_width="0dp"
-        android:layout_height="6dp"
-        android:background="@color/colorPrimary"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/rewards_start_vertical_guideline"
         app:layout_constraintEnd_toEndOf="@id/rewards_end_vertical_guideline"
-        app:layout_constraintTop_toBottomOf="@id/rewards_textView"/>
+        app:layout_constraintTop_toTopOf="@id/redeem_top_horizontal_guideline" />
 
 
     <Button
@@ -110,7 +42,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/nfta_btn_text"
-        android:textSize="20sp"
+        android:textSize="@dimen/_15ssp"
         android:textColor="@color/off_black"
         android:drawableEnd="@drawable/nfta_logo"
         android:background="@drawable/rewards_btn_rectangle_bg"
@@ -124,7 +56,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/bike_btn_text"
-        android:textSize="20sp"
+        android:textSize="@dimen/_15ssp"
         android:textColor="@color/off_black"
         android:drawableEnd="@drawable/bike_share_logo"
         android:background="@drawable/rewards_btn_rectangle_bg"
@@ -138,7 +70,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/bills_btn_text"
-        android:textSize="20sp"
+        android:textSize="@dimen/_15ssp"
         android:textColor="@color/off_black"
         android:drawableEnd="@drawable/bills_logo"
         android:background="@drawable/rewards_btn_rectangle_bg"
@@ -152,7 +84,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/sabres_btn_text"
-        android:textSize="20sp"
+        android:textSize="@dimen/_15ssp"
         android:textColor="@color/off_black"
         android:drawableEnd="@drawable/sabres_logo"
         android:background="@drawable/rewards_btn_rectangle_bg"
