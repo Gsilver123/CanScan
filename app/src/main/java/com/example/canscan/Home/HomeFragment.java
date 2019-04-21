@@ -1,6 +1,7 @@
 package com.example.canscan.Home;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import java.util.Objects;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, DatabaseObserver {
 
+    private TextView mOpenBuffaloHrefLinkButton;
     private TextView mPointsEarned;
     private Button mScanCodeButton;
     private Button mLeaderBoardButton;
@@ -60,6 +62,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
     }
 
     private void initializeViewVariables(View view) {
+        mOpenBuffaloHrefLinkButton = view.findViewById(R.id.open_buffalo_href_link);
         mPointsEarned = view.findViewById(R.id.earned_points_textView);
         mScanCodeButton = view.findViewById(R.id.scan_code_btn);
         mLeaderBoardButton = view.findViewById(R.id.leader_board_btn);
@@ -68,6 +71,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
     }
 
     private void setOnClickListeners() {
+        mOpenBuffaloHrefLinkButton.setOnClickListener(this);
         mScanCodeButton.setOnClickListener(this);
         mLeaderBoardButton.setOnClickListener(this);
         mRewardsButton.setOnClickListener(this);
@@ -93,6 +97,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Data
                 break;
             case R.id.profile_btn:
                 startFragment(new ProfileFragment());
+                break;
+            case R.id.open_buffalo_href_link:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://data" +
+                        ".buffalony.gov/Quality-of-Life/Recyclable-Materials/ru4s-wz29/data"));
+                startActivity(browserIntent);
                 break;
             default:
                 Toast.makeText(getContext(), "Action not supported", Toast.LENGTH_SHORT).show();

@@ -6,7 +6,7 @@
     <string name="password_login">Password</string>
     <string name="login_btn">Login</string>
     <string name="new_user_textView">New User? Click </string>
-    <string name="new_user_btn">Here!</string>
+    <string name="here">Here!</string>
 
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
@@ -19,6 +19,8 @@
     <string name="rewards">Rewards</string>
     <string name="profile">User Profile</string>
     <string name="welcome">Welcome</string>
+    <string name="open_buffalo_href_textView_1">For accepted recyclable materials,</string>
+    <string name="open_buffalo_href_textView_2">please click </string>
 
     <string name="top_r">edeem</string>
     <string name="center_r">ecycling</string>

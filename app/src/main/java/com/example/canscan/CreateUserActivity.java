@@ -98,8 +98,8 @@ public class CreateUserActivity extends AppCompatActivity implements View.OnClic
                     Objects.requireNonNull(task.getResult()).getId()
             );
 
-            updateDoc.append(USER_NAME, mUsernameEditText.getText().toString().toLowerCase());
-            updateDoc.append(PASSWORD, mPasswordEditText.getText().toString().toLowerCase());
+            updateDoc.append(USER_NAME, mUsernameEditText.getText().toString());
+            updateDoc.append(PASSWORD, mPasswordEditText.getText().toString());
             updateDoc.append(TOTAL_POINTS, 0);
             updateDoc.append(POINTS, 0);
             updateDoc.append(METRO, 0);

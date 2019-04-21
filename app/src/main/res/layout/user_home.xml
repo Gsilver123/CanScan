@@ -97,33 +97,70 @@
         app:layout_constraintEnd_toEndOf="@id/button_end_vertical_guideline"
         app:layout_constraintTop_toTopOf="@id/settings_btn_guideline" />
 
+    <TextView
+        android:id="@+id/open_buffalo_href_textView_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/open_buffalo_href_textView_1"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/_15ssp"
+        app:layout_constraintBottom_toTopOf="@id/open_buffalo_href_textView_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/open_buffalo_href_textView_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/open_buffalo_href_textView_2"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/_15ssp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/open_buffalo_href_link"
+        app:layout_constraintStart_toStartOf="@id/open_buffalo_href_textView_1" />
+
+    <TextView
+        android:id="@+id/open_buffalo_href_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/here"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_15ssp"
+        app:layout_constraintBottom_toBottomOf="@id/open_buffalo_href_textView_2"
+        app:layout_constraintEnd_toEndOf="@id/open_buffalo_href_textView_1"
+        app:layout_constraintStart_toEndOf="@id/open_buffalo_href_textView_2"
+        app:layout_constraintTop_toTopOf="@id/open_buffalo_href_textView_2" />
+
     <android.support.constraint.Guideline
         android:id="@+id/scan_code_btn_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".45"/>
+        app:layout_constraintGuide_percent=".4"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/leader_board_btn_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".575"/>
+        app:layout_constraintGuide_percent=".525"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/rewards_btn_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".7"/>
+        app:layout_constraintGuide_percent=".65"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/settings_btn_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".825"/>
+        app:layout_constraintGuide_percent=".775"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/button_start_vertical_guideline"
@@ -158,6 +195,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".15"/>
+        app:layout_constraintGuide_percent=".1"/>
 
 </android.support.constraint.ConstraintLayout>
