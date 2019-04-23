@@ -241,7 +241,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private void promptIfZipcodeIsNotInArea() {
         AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle("Invalid Buffalo Zipcode")
-                .setMessage("Your zipcode is not a valid city of Buffalo zipcode." +
+                .setMessage("Your zipcode is not a valid City of Buffalo zipcode." +
                         " If you would like to know your curbside recycle date " +
                         "please update. Otherwise, happy recycling!")
                 .setNeutralButton("Ok", (dialogInterface, which) -> {

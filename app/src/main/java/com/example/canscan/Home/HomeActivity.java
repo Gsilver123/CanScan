@@ -101,7 +101,7 @@ public class HomeActivity extends AppCompatActivity implements DatabaseObserver 
     private void promptIfZipcodeIsNotInArea() {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Invalid Buffalo Zipcode")
-                .setMessage("Your zipcode is not a valid city of Buffalo zipcode." +
+                .setMessage("Your zipcode is not a valid City of Buffalo zipcode." +
                         " If you would like to know your curbside recycle date" +
                         " please change this by navigating to the User Profile page. Otherwise," +
                         " happy recycling!")
