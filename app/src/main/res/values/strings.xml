@@ -1,5 +1,5 @@
 <resources>
-    <string name="mongo_stitch_id">canscandb-cgwjo</string>
+    <string name="mongo_stitch_id"></string>
     
     <string name="app_name">CanScan</string>
     <string name="username_login">Username</string>
